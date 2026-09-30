@@ -71,7 +71,7 @@ export const projectsData: Project[] = [
       "Bed Utilization Rate",
     ],
     links: {
-      github: "[ADD PROJECT LINKS]",
+      github: "https://github.com/jettisrineshreddy-cpu/Hospital-Operations-Patient-Analytics-Dashboard",
     },
   },
   {

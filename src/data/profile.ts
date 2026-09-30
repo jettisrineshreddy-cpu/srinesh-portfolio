@@ -52,10 +52,10 @@ export const profileData: Profile = {
     "Artificial Intelligence & Scientific Computing",
   ],
   links: {
-    github: "[ADD GITHUB URL]",
-    linkedin: "[ADD LINKEDIN URL]",
-    email: "[ADD PROFESSIONAL EMAIL]",
-    resume: "[ADD RESUME URL/PATH]",
+    github: "https://github.com/jettisrineshreddy-cpu",
+    linkedin: "https://www.linkedin.com/in/jetti-srinesh-reddy-42a396377/",
+    email: "jettisrineshreddy@gmail.com",
+    resume: "https://drive.google.com/file/d/1jH7TF_XeC1R84BDPVapOfsxQLuffF-o8/view?usp=drive_link",
   },
   cloudLearning: {
     title: "Cloud & Data Engineering Learning",
