@@ -1,7 +1,7 @@
 .projects__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 2rem;
+  grid-template-columns: 1fr;
+  gap: 3rem;
 }
 
 .project-card {
@@ -10,7 +10,7 @@
   background: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: 2.5rem;
   backdrop-filter: var(--glass-blur);
   transition: all var(--transition-normal);
   height: 100%;
@@ -23,7 +23,6 @@
 }
 
 .project-card--featured {
-  grid-column: span 2;
   background: var(--bg-card-featured);
   border-color: rgba(139, 92, 246, 0.3);
 }
@@ -161,8 +160,4 @@
   border-top: 1px solid var(--glass-border);
 }
 
-@media (max-width: 900px) {
-  .project-card--featured {
-    grid-column: span 1;
-  }
-}
+
