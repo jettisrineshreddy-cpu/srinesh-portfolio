@@ -9,6 +9,7 @@ export interface Project {
   datasetOrScope?: string;
   analyticalAreasOrComponents: string[];
   knownKPIs?: string[];
+  images?: string[]; // Added array for 3D dashboard images
   links: {
     github: string;
     demo?: string;
@@ -70,6 +71,12 @@ export const projectsData: Project[] = [
       "Readmission Rate",
       "Bed Utilization Rate",
     ],
+    images: [
+      "/projects/hospital-1.png",
+      "/projects/hospital-2.png",
+      "/projects/hospital-3.png",
+      "/projects/hospital-4.png"
+    ],
     links: {
       github: "https://github.com/jettisrineshreddy-cpu/Hospital-Operations-Patient-Analytics-Dashboard",
     },
@@ -117,6 +124,7 @@ export const projectsData: Project[] = [
       "Attrition / Retention Indicators",
       "Employee Performance Indicators",
     ],
+    images: ["/projects/attrition.png"],
     links: {
       github: "[ADD PROJECT LINKS]",
     },

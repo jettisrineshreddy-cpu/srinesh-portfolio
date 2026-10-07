@@ -3,6 +3,7 @@ import { projectsData } from '../../data/projects';
 import { Badge } from '../ui/Badge';
 import { GithubIcon } from '../ui/Icons';
 import { ExternalLink, Database } from 'lucide-react';
+import { ProjectImage3D } from '../ui/ProjectImage3D';
 import './Projects.css';
 
 export const Projects: React.FC = () => {
@@ -41,6 +42,11 @@ export const Projects: React.FC = () => {
               
               <p className="project-card__summary">{project.summary}</p>
               
+              {project.images && project.images.length > 0 && (
+                <ProjectImage3D images={project.images} />
+              )}
+              
+
               {project.datasetOrScope && (
                 <div className="project-card__scope">
                   <Database size={14} />

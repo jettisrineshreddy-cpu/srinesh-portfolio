@@ -1,0 +1,66 @@
+.project-image-3d-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  perspective: 1000px;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius-md);
+  cursor: crosshair;
+  --rotateX: 0deg;
+  --rotateY: 0deg;
+  --mouseX: -1000px;
+  --mouseY: -1000px;
+}
+
+.project-image-3d-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rotateX)) rotateY(var(--rotateY));
+  transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: var(--radius-md);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 
+              0 0 20px rgba(139, 92, 246, 0.2);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Reset transition on leave to animate smoothly back to 0,0 */
+.project-image-3d-container:not(:hover) .project-image-3d-wrapper {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.project-image-3d-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  transform: translateZ(20px); /* Gives the image depth inside the card */
+}
+
+.project-image-3d-img.active {
+  opacity: 1;
+}
+
+/* Holographic glare effect */
+.project-image-3d-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at var(--mouseX) var(--mouseY),
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0) 50%
+  );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 10;
+  transform: translateZ(30px);
+}
