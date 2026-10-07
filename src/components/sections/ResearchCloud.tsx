@@ -1,46 +1,35 @@
 import React from 'react';
 import { profileData } from '../../data/profile';
-import { Cloud, Network } from 'lucide-react';
-import { Badge } from '../ui/Badge';
 import './ResearchCloud.css';
 
 export const ResearchCloud: React.FC = () => {
   return (
     <section id="research" className="research-cloud section-padding">
-      <div className="research-cloud__grid">
-        
-        {/* Cloud & Data Engineering Learning */}
-        <div className="focus-card">
-          <div className="focus-card__header">
-            <div className="focus-card__icon-wrapper">
-              <Cloud size={24} />
-            </div>
-            <h3 className="focus-card__title">{profileData.cloudLearning.title}</h3>
-          </div>
-          <p className="focus-card__desc">{profileData.cloudLearning.note}</p>
-          <div className="focus-card__tags">
-            {profileData.cloudLearning.technologies.map((tech, i) => (
-              <Badge key={i} variant="default">{tech}</Badge>
-            ))}
-          </div>
+      <div className="content-wrapper">
+        <div className="section-header">
+          <h2 className="section-title">LEARNING & RESEARCH</h2>
+          <div className="section-line"></div>
         </div>
 
-        {/* Research & Scientific Computing */}
-        <div className="focus-card">
-          <div className="focus-card__header">
-            <div className="focus-card__icon-wrapper focus-card__icon-wrapper--purple">
-              <Network size={24} />
-            </div>
-            <h3 className="focus-card__title">{profileData.research.title}</h3>
+        <div className="focus-panels">
+          <div className="focus-panel">
+            <h3 className="focus-panel__heading">Cloud & Data Engineering</h3>
+            <p className="focus-panel__note">{profileData.cloudLearning.note}</p>
+            <p className="focus-panel__items">
+              {profileData.cloudLearning.technologies.join(' · ')}
+            </p>
           </div>
-          <p className="focus-card__desc">{profileData.research.note}</p>
-          <div className="focus-card__tags">
-            {profileData.research.areas.map((area, i) => (
-              <Badge key={i} variant="purple">{area}</Badge>
-            ))}
+
+          <div className="focus-panel__divider" />
+
+          <div className="focus-panel">
+            <h3 className="focus-panel__heading">Research & Scientific Computing</h3>
+            <p className="focus-panel__note">{profileData.research.note}</p>
+            <p className="focus-panel__items">
+              {profileData.research.areas.join(' · ')}
+            </p>
           </div>
         </div>
-
       </div>
     </section>
   );

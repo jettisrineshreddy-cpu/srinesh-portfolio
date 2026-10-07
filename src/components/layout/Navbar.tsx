@@ -1,146 +1,126 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileText, Mail } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '../ui/Icons';
 import { profileData } from '../../data/profile';
 import './Navbar.css';
 
 const NAV_LINKS = [
-  { href: '#about', label: 'Identity' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#certifications', label: 'Credentials' },
-  { href: '#research', label: 'Research' },
-  { href: '#contact', label: 'Connect' },
+  { href: '#hero', label: 'HOME' },
+  { href: '#about', label: 'ABOUT' },
+  { href: '#projects', label: 'WORK' },
+  { href: '#certifications', label: 'EXPERIENCE' },
+  { href: '#contact', label: 'CONTACT' },
 ];
 
 export const Navbar: React.FC = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
-  // Solidify navbar on scroll
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Active section highlighting via IntersectionObserver
   useEffect(() => {
-    const sectionIds = ['hero', 'about', 'projects', 'skills', 'certifications', 'research', 'contact'];
+    const ids = ['hero', 'about', 'projects', 'certifications', 'research', 'contact'];
     const observers: IntersectionObserver[] = [];
-
-    sectionIds.forEach((id) => {
+    ids.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { threshold: 0.3 }
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { threshold: 0.25 }
       );
-      observer.observe(el);
-      observers.push(observer);
+      obs.observe(el);
+      observers.push(obs);
     });
-
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
-  const closeMobile = () => setMobileMenuOpen(false);
+  const close = () => setMobileOpen(false);
 
   return (
-    <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
-      <div className="navbar__container">
-        <a href="#hero" className="navbar__brand" aria-label="J. Srinesh – Home" onClick={closeMobile}>
-          <span className="navbar__brand-prefix">//</span>
-          <span className="navbar__brand-name">{profileData.name}</span>
-          <span className="navbar__brand-badge">B.Tech AI</span>
-        </a>
+    <>
+      <header className={`navbar${scrolled ? ' navbar--scrolled' : ''}`}>
+        <div className="navbar__inner">
+          <a href="#hero" className="navbar__brand" onClick={close} aria-label="J. Srinesh — Home">
+            SRINESH
+          </a>
 
-        {/* Desktop Navigation */}
-        <nav className="navbar__nav" aria-label="Main navigation">
-          <ul className="navbar__links">
+          <nav className="navbar__nav" aria-label="Main navigation">
+            <ul className="navbar__links">
+              {NAV_LINKS.map(({ href, label }) => {
+                const id = href.slice(1);
+                const isActive =
+                  activeSection === id ||
+                  (id === 'certifications' && activeSection === 'certifications');
+                return (
+                  <li key={href}>
+                    <a
+                      href={href}
+                      className={`navbar__link${isActive ? ' navbar__link--active' : ''}`}
+                    >
+                      {label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <div className="navbar__right">
+            <a
+              href={profileData.links.resume}
+              className="navbar__cta"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Resume"
+            >
+              RESUME &rarr;
+            </a>
+
+            <button
+              className={`navbar__toggle${mobileOpen ? ' navbar__toggle--open' : ''}`}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileOpen}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Full-screen mobile overlay */}
+      <div
+        className={`mobile-menu${mobileOpen ? ' mobile-menu--open' : ''}`}
+        aria-hidden={!mobileOpen}
+      >
+        <nav aria-label="Mobile navigation">
+          <ul className="mobile-menu__links">
             {NAV_LINKS.map(({ href, label }) => (
               <li key={href}>
-                <a
-                  href={href}
-                  className={`navbar__link ${activeSection === href.slice(1) ? 'navbar__link--active' : ''}`}
-                >
+                <a href={href} className="mobile-menu__link" onClick={close}>
                   {label}
                 </a>
               </li>
             ))}
-          </ul>
-        </nav>
-
-        {/* Desktop Actions */}
-        <div className="navbar__actions">
-          <a
-            href={profileData.links.resume}
-            className="navbar__cta"
-            aria-label="View Resume (opens in new tab)"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FileText size={16} />
-            <span>Resume</span>
-          </a>
-
-          <div className="navbar__socials" aria-label="Social links">
-            <a href={profileData.links.github} aria-label="GitHub Profile" className="navbar__icon-link" target="_blank" rel="noopener noreferrer">
-              <GithubIcon size={18} />
-            </a>
-            <a href={profileData.links.linkedin} aria-label="LinkedIn Profile" className="navbar__icon-link" target="_blank" rel="noopener noreferrer">
-              <LinkedinIcon size={18} />
-            </a>
-            <a href={`mailto:${profileData.links.email}`} aria-label="Send Email" className="navbar__icon-link">
-              <Mail size={18} />
-            </a>
-          </div>
-
-          <button
-            className="navbar__menu-toggle"
-            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-menu"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Drawer */}
-      <nav
-        id="mobile-menu"
-        className={`navbar__mobile-drawer ${mobileMenuOpen ? 'navbar__mobile-drawer--open' : ''}`}
-        aria-label="Mobile navigation"
-        aria-hidden={!mobileMenuOpen}
-      >
-        <ul className="navbar__mobile-links">
-          {NAV_LINKS.map(({ href, label }) => (
-            <li key={href}>
-              <a href={href} className="navbar__mobile-link" onClick={closeMobile}>
-                {label}
+            <li>
+              <a
+                href={profileData.links.resume}
+                className="mobile-menu__link mobile-menu__link--cta"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={close}
+              >
+                RESUME &rarr;
               </a>
             </li>
-          ))}
-          <li className="navbar__mobile-cta-item">
-            <a
-              href={profileData.links.resume}
-              className="navbar__mobile-cta"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={closeMobile}
-            >
-              <FileText size={16} />
-              <span>View Resume</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+          </ul>
+        </nav>
+      </div>
+    </>
   );
 };

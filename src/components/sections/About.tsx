@@ -1,51 +1,82 @@
 import React from 'react';
 import { profileData } from '../../data/profile';
-import { CheckCircle2 } from 'lucide-react';
+import { experienceData } from '../../data/experience';
 import './About.css';
 
 export const About: React.FC = () => {
   return (
     <section id="about" className="about section-padding">
-      <div className="section-header">
-        <h2 className="section-title">Professional Identity</h2>
-        <div className="section-line"></div>
-      </div>
-
-      <div className="about__content">
-        <div className="about__text-content">
-          <p className="about__description">
-            I am a {profileData.status} at {profileData.university}, {profileData.campus}. 
-            My academic and professional journey is focused on the intersection of data, 
-            artificial intelligence, and practical engineering.
-          </p>
-          <p className="about__description">
-            {profileData.careerDirection} I enjoy taking raw datasets and engineering them 
-            into clean, actionable models that solve real-world problems.
-          </p>
-          
-          <div className="about__focus-areas">
-            {profileData.positioning.map((item, index) => (
-              <div key={index} className="about__focus-item">
-                <CheckCircle2 size={20} className="about__check-icon" />
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
+      <div className="content-wrapper">
+        <div className="section-header">
+          <h2 className="section-title">ABOUT</h2>
+          <div className="section-line"></div>
         </div>
 
-        <div className="about__visual-container">
-          <div className="about__glass-card">
-            <div className="about__glass-header">
-              <span className="dot dot-red"></span>
-              <span className="dot dot-yellow"></span>
-              <span className="dot dot-green"></span>
+        <div className="about__grid">
+          {/* Left: Statement */}
+          <div className="about__left">
+            <p className="about__heading">
+              I'm a B.Tech Artificial Intelligence student building practical systems at the intersection of data, AI, and engineering.
+            </p>
+            <p className="about__desc">
+              {profileData.careerDirection} I enjoy taking raw datasets and engineering them into clean, actionable models that solve real-world problems.
+            </p>
+
+            <ul className="about__list" aria-label="Focus areas">
+              {profileData.positioning.map((item, i) => (
+                <li key={i} className="about__list-item">
+                  <span className="about__list-arrow">&rarr;</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            {/* Experience block */}
+            <div className="about__experience">
+              <h3 className="about__exp-label">EXPERIENCE</h3>
+              <div className="about__exp-divider" />
+              {experienceData.map((exp) => (
+                <div key={exp.id} className="about__exp-item">
+                  <span className="about__exp-year">{exp.period}</span>
+                  <div className="about__exp-details">
+                    <span className="about__exp-role">{exp.role}</span>
+                    <span className="about__exp-org">{exp.organization}</span>
+                    <span className="about__exp-tech">{exp.type} &middot; {exp.technologies.join(', ')}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="about__glass-body">
-              <div className="code-line"><span className="keyword">const</span> <span className="variable">analyst</span> = <span className="keyword">new</span> <span className="class">DataProfessional</span>();</div>
-              <div className="code-line"><span className="variable">analyst</span>.<span className="method">loadData</span>(<span className="string">"raw_datasets"</span>);</div>
-              <div className="code-line"><span className="variable">analyst</span>.<span className="method">applyAI</span>();</div>
-              <div className="code-line"><span className="keyword">return</span> <span className="variable">analyst</span>.<span className="method">getInsights</span>();</div>
-              <div className="code-line comment">// Ready for production</div>
+          </div>
+
+          {/* Right: Metadata */}
+          <div className="about__right">
+            <div className="about__meta">
+              <div className="about__meta-row">
+                <span className="about__meta-key">LOCATION</span>
+                <span className="about__meta-value">India</span>
+              </div>
+              <div className="about__meta-divider" />
+              <div className="about__meta-row">
+                <span className="about__meta-key">EDUCATION</span>
+                <span className="about__meta-value">
+                  B.Tech Artificial Intelligence<br />
+                  {profileData.university}<br />
+                  <span className="about__meta-sub">{profileData.duration}</span>
+                </span>
+              </div>
+              <div className="about__meta-divider" />
+              <div className="about__meta-row">
+                <span className="about__meta-key">FOCUS</span>
+                <span className="about__meta-value">AI &times; Data &times; Engineering</span>
+              </div>
+              <div className="about__meta-divider" />
+              <div className="about__meta-row">
+                <span className="about__meta-key">STATUS</span>
+                <span className="about__meta-value about__meta-value--available">
+                  <span className="about__status-dot" />
+                  Open to Opportunities
+                </span>
+              </div>
             </div>
           </div>
         </div>

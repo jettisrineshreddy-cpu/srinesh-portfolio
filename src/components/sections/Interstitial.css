@@ -1,6 +1,6 @@
 .interstitial {
   position: relative;
-  min-height: 80vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,15 +9,7 @@
 }
 
 .interstitial__bg-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
+  display: none; /* removed purple glow */
 }
 
 .interstitial__content {
@@ -31,56 +23,70 @@
 }
 
 .interstitial__title {
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
+  letter-spacing: -0.03em;
   text-align: center;
-  color: #fff;
+  color: var(--text-primary);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interstitial__title {
+    opacity: 1;
+  }
 }
 
 .interstitial__cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
   width: 100%;
   max-width: 1000px;
   padding: 0 1.5rem;
 }
 
 .interstitial__card {
-  background: rgba(10, 10, 15, 0.6);
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
   padding: 2rem;
   text-align: center;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transition: border-color var(--transition-normal), transform var(--transition-normal);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interstitial__card {
+    opacity: 1;
+  }
 }
 
 .interstitial__card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(192, 132, 252, 0.6);
-  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
+  transform: translateY(-4px);
+  border-color: var(--glass-border-hover);
 }
 
 .interstitial__icon {
-  color: #c084fc;
+  color: var(--text-secondary);
   margin-bottom: 0.5rem;
 }
 
 .interstitial__card h3 {
-  font-size: 1.25rem;
-  color: #fff;
+  font-size: 1.1rem;
+  color: var(--text-primary);
 }
 
 .interstitial__card p {
   color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {
@@ -89,3 +95,4 @@
     padding: 6rem 0;
   }
 }
+

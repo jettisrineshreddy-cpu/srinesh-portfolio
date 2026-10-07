@@ -1,12 +1,14 @@
 import React from 'react';
 import './Button.css';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+interface ButtonProps {
+  variant?: 'primary' | 'outline';
   href?: string;
   target?: string;
   rel?: string;
   children: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -16,20 +18,20 @@ export const Button: React.FC<ButtonProps> = ({
   rel,
   children,
   className = '',
-  ...props
+  onClick,
 }) => {
-  const combinedClass = `btn btn--${variant} ${className}`;
+  const classes = `btn btn--${variant} ${className}`.trim();
 
   if (href) {
     return (
-      <a href={href} target={target} rel={rel} className={combinedClass}>
+      <a href={href} className={classes} target={target} rel={rel} onClick={onClick}>
         {children}
       </a>
     );
   }
 
   return (
-    <button className={combinedClass} {...props}>
+    <button className={classes} onClick={onClick}>
       {children}
     </button>
   );
