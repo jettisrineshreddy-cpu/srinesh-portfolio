@@ -35,6 +35,7 @@ export const projectsData: Project[] = [
       "Player Performance Benchmarks",
       "Match-Level Survival Analysis",
     ],
+    images: ["/projects/pubg.png"],
     links: {
       github: "[ADD PROJECT LINKS]",
     },
@@ -104,6 +105,11 @@ export const projectsData: Project[] = [
       "Customer Purchasing Patterns",
       "Revenue Trajectories",
       "Business Health KPIs",
+    ],
+    images: [
+      "/projects/ecommerce-1.png",
+      "/projects/ecommerce-2.png",
+      "/projects/ecommerce-3.png",
     ],
     links: {
       github: "[ADD PROJECT LINKS]",
