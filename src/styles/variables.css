@@ -19,8 +19,9 @@
   /* Accent Colors */
   --accent-cyan: #00f0ff;
   --accent-cyan-glow: rgba(0, 240, 255, 0.3);
-  --accent-purple: #8b5cf6;
-  --accent-purple-glow: rgba(139, 92, 246, 0.3);
+  --accent-purple: #c084fc; /* Brighter neon purple */
+  --accent-purple-dark: #8b5cf6;
+  --accent-purple-glow: rgba(192, 132, 252, 0.4);
   --accent-emerald: #10b981;
   --accent-emerald-glow: rgba(16, 185, 129, 0.25);
   --accent-amber: #f59e0b;

@@ -7,80 +7,70 @@
   padding-top: var(--nav-height);
 }
 
-/* Initial invisible states — GSAP animates these in via useGsapAnimations */
-.hero__greeting,
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding-top: calc(var(--nav-height) + 2rem);
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  width: 100%;
+}
+
+/* GSAP initial states */
+.hero__badge,
 .hero__title,
-.hero__subtitle,
-.hero__tagline-wrapper,
 .hero__statement,
-.hero__actions {
+.hero__actions,
+.hero__visual {
   opacity: 0;
 }
 
-/* Fallback: if JS/GSAP fails or reduced-motion, show everything */
 @media (prefers-reduced-motion: reduce) {
-  .hero__greeting,
+  .hero__badge,
   .hero__title,
-  .hero__subtitle,
-  .hero__tagline-wrapper,
   .hero__statement,
-  .hero__actions {
+  .hero__actions,
+  .hero__visual {
     opacity: 1;
   }
 }
 
 .hero__content {
-  max-width: 800px;
   position: relative;
   z-index: 10;
 }
 
-.hero__greeting {
-  font-family: var(--font-mono);
-  color: var(--accent-cyan);
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  letter-spacing: 0.05em;
+.hero__badge {
+  margin-bottom: 2rem;
 }
 
 .hero__title {
-  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-size: clamp(3rem, 5vw, 4.5rem);
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(180deg, #ffffff 0%, #a5b4fc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
   letter-spacing: -0.02em;
 }
 
-.hero__subtitle {
-  font-size: clamp(1.25rem, 4vw, 2.25rem);
-  color: var(--text-secondary);
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  line-height: 1.3;
-}
-
-.hero__tagline-wrapper {
-  margin-bottom: 1.5rem;
-}
-
-.hero__tagline {
-  display: inline-block;
-  font-family: var(--font-mono);
-  color: var(--accent-cyan);
-  background: rgba(0, 240, 255, 0.1);
-  border: 1px solid rgba(0, 240, 255, 0.2);
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-sm);
-  font-size: clamp(0.85rem, 2vw, 1.1rem);
+.text-gradient {
+  background: linear-gradient(90deg, #c084fc 0%, #00f0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero__statement {
-  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-size: clamp(1rem, 2vw, 1.15rem);
   color: var(--text-muted);
-  max-width: 600px;
+  max-width: 500px;
   line-height: 1.6;
   margin-bottom: 2.5rem;
 }
@@ -89,6 +79,13 @@
   display: flex;
   gap: 1.25rem;
   flex-wrap: wrap;
+}
+
+.hero__visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
 }
 
 .hero__scroll-indicator {
@@ -125,13 +122,34 @@
   100% { transform: translateY(12px); opacity: 0; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .hero__visual {
+    order: -1; /* Show orbit above content on mobile */
+    max-height: 300px;
+  }
+
   .hero__actions {
     flex-direction: column;
     width: 100%;
   }
-  
+
   .hero__actions .btn {
     width: 100%;
+    justify-content: center;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__visual {
+    display: none; /* Hide orbit on very small screens */
   }
 }
