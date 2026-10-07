@@ -87,24 +87,7 @@ export function useGsapAnimations() {
       );
     });
 
-    // Skill groups staggered
-    gsap.utils.toArray('.skills__grid').forEach((grid: any) => {
-      gsap.fromTo(
-        grid.querySelectorAll('.skill-group'),
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: grid,
-            start: 'top 80%',
-          },
-        }
-      );
-    });
+    // Skills now handled entirely by CSS marquee animation
 
     // Certifications staggered
     gsap.utils.toArray('.certifications__grid').forEach((grid: any) => {
@@ -143,6 +126,38 @@ export function useGsapAnimations() {
         }
       );
     });
+
+    // Interstitial animation
+    gsap.fromTo(
+      '.interstitial__title',
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.interstitial',
+          start: 'top 70%',
+        }
+      }
+    );
+    
+    gsap.fromTo(
+      '.interstitial__card',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: 'back.out(1.2)',
+        scrollTrigger: {
+          trigger: '.interstitial__cards',
+          start: 'top 75%',
+        }
+      }
+    );
 
     // Contact container
     gsap.fromTo(

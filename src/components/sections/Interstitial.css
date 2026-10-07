@@ -1,0 +1,91 @@
+.interstitial {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 4rem 0;
+}
+
+.interstitial__bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.interstitial__content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+  width: 100%;
+}
+
+.interstitial__title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+}
+
+.interstitial__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 1.5rem;
+}
+
+.interstitial__card {
+  background: rgba(10, 10, 15, 0.6);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.interstitial__card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(192, 132, 252, 0.6);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
+}
+
+.interstitial__icon {
+  color: #c084fc;
+  margin-bottom: 0.5rem;
+}
+
+.interstitial__card h3 {
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.interstitial__card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .interstitial {
+    min-height: auto;
+    padding: 6rem 0;
+  }
+}

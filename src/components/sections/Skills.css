@@ -1,57 +1,69 @@
-.skills__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
+.skills {
+  position: relative;
+  overflow: hidden;
 }
 
-.skill-group {
-  background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  padding: 2rem;
-  backdrop-filter: var(--glass-blur);
-  transition: border-color var(--transition-normal);
-}
-
-.skill-group:hover {
-  border-color: rgba(139, 92, 246, 0.4);
-}
-
-.skill-group__title {
-  font-size: 1.25rem;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-}
-
-.skill-group__desc {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
-}
-
-.skill-group__items {
+.skills__marquee-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 1.5rem;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
 }
 
-.skill-item {
+.skills__marquee {
+  width: 100%;
+  overflow: hidden;
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
-.skill-item__dot {
-  width: 6px;
-  height: 6px;
-  background: var(--accent-purple);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--accent-purple-glow);
+.skills__track {
+  display: flex;
+  gap: 1.5rem;
+  padding-left: 1.5rem;
+  white-space: nowrap;
+  width: fit-content;
 }
 
-.skill-item__name {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+.track-left {
+  animation: scroll-left 35s linear infinite;
+}
+
+.track-right {
+  animation: scroll-right 35s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.skill-badge {
+  background: rgba(15, 15, 20, 0.4);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  padding: 1rem 2.5rem;
+  border-radius: 99px;
+  font-size: 1.1rem;
   font-weight: 500;
+  color: var(--text-primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-badge:hover {
+  border-color: rgba(192, 132, 252, 0.6);
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.3);
+  transform: translateY(-2px);
 }

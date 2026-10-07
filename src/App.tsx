@@ -3,6 +3,7 @@ import { Navbar } from './components/layout/Navbar';
 import { Scene } from './components/three/Scene';
 import { Hero } from './components/sections/Hero';
 import { About } from './components/sections/About';
+import { Interstitial } from './components/sections/Interstitial';
 import { Projects } from './components/sections/Projects';
 import { Skills } from './components/sections/Skills';
 import { Certifications } from './components/sections/Certifications';
@@ -30,6 +31,7 @@ export const App: React.FC = () => {
       <main id="main-content" className="content-wrapper">
         <Hero />
         <About />
+        <Interstitial />
         <Projects />
         <Skills />
         <Certifications />
