@@ -1,70 +1,68 @@
-/* Design System Variables - Futuristic Data Void Theme */
+/* Design System Variables - Premium Editorial Theme */
 
 :root {
-  /* Color Palette - Deep Dark Space / Void */
-  --bg-primary: #030712;
-  --bg-secondary: #070e22;
-  --bg-tertiary: #0c1836;
-  --bg-card: rgba(12, 24, 54, 0.65);
-  --bg-card-hover: rgba(18, 35, 78, 0.8);
-  --bg-card-featured: rgba(14, 30, 68, 0.85);
+  /* Color Palette - Deep Monochrome */
+  --bg-primary: #050505;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #121212;
+  --bg-card: rgba(18, 18, 18, 0.4);
+  --bg-card-hover: rgba(24, 24, 24, 0.8);
+  --bg-card-featured: rgba(20, 20, 20, 0.6);
 
   /* Glassmorphism & Borders */
-  --glass-bg: rgba(7, 14, 34, 0.72);
-  --glass-border: rgba(0, 240, 255, 0.16);
-  --glass-border-hover: rgba(0, 240, 255, 0.45);
-  --glass-border-featured: rgba(112, 0, 255, 0.35);
-  --glass-blur: blur(14px);
+  --glass-bg: rgba(10, 10, 10, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.2);
+  --glass-border-featured: rgba(255, 255, 255, 0.15);
+  --glass-blur: blur(20px);
 
-  /* Accent Colors */
-  --accent-cyan: #00f0ff;
-  --accent-cyan-glow: rgba(0, 240, 255, 0.3);
-  --accent-purple: #c084fc; /* Brighter neon purple */
-  --accent-purple-dark: #8b5cf6;
-  --accent-purple-glow: rgba(192, 132, 252, 0.4);
-  --accent-emerald: #10b981;
-  --accent-emerald-glow: rgba(16, 185, 129, 0.25);
-  --accent-amber: #f59e0b;
+  /* Accent Colors (Restrained) */
+  --accent-primary: #ffffff;
+  --accent-secondary: #888888;
+  /* Very subtle tint for special interactions, avoiding neon */
+  --accent-tint: #c2d1d9; 
 
   /* Typography Colors */
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
-  --text-accent: #00f0ff;
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  --text-muted: #737373;
+  --text-dim: #525252;
+  --text-accent: #ffffff;
 
   /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-  --font-heading: 'Space Grotesk', 'Outfit', var(--font-sans);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  /* Using a single strong font family for that editorial feel */
+  --font-heading: var(--font-sans);
 
   /* Spacing Scale */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 8rem;
 
   /* Layout */
-  --container-max-width: 1200px;
-  --nav-height: 72px;
+  --container-max-width: 1400px;
+  --nav-height: 80px;
 
   /* Transitions & Animation Timing */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 300ms cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-smooth: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 1000ms cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Border Radii */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
+  /* Border Radii (Sharper for editorial feel) */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
   --radius-full: 9999px;
 
   /* Elevation & Shadows */
-  --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
-  --shadow-glow: 0 0 24px -4px var(--accent-cyan-glow);
+  --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px -10px rgba(255, 255, 255, 0.05);
 }
 
 /* Reduced Motion Preference Override */

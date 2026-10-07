@@ -12,12 +12,12 @@ export function useGsapAnimations() {
     if (prefersReduced) return;
 
     // Hero element animations
-    const heroTl = gsap.timeline();
-    heroTl.fromTo('.hero__badge', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
-          .fromTo('.hero__title', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
-          .fromTo('.hero__statement', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.6')
-          .fromTo('.hero__actions', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4')
-          .fromTo('.hero__visual', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 1.2, ease: 'back.out(1.2)' }, '-=0.8');
+    const heroTl = gsap.timeline({ delay: 2.2 });
+    heroTl.fromTo('.hero__status', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
+          .fromTo('.hero__title-line', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power4.out' }, '-=0.4')
+          .fromTo('.hero__subtitle', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+          .fromTo('.hero__statement', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.6')
+          .fromTo('.hero__actions', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4');
 
     // Section headers
     gsap.utils.toArray('.section-header').forEach((header: any) => {
