@@ -32,8 +32,29 @@
   box-shadow: 0 10px 40px -10px rgba(192, 132, 252, 0.4);
 }
 
-.project-card__content {
+.project-card__layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   flex-grow: 1;
+}
+
+@media (min-width: 1024px) {
+  .project-card__layout {
+    flex-direction: row;
+    align-items: center;
+    gap: 4rem;
+  }
+  
+  .project-card__content {
+    flex: 1;
+    min-width: 0; /* Prevents flex items from blowing out of their container */
+  }
+
+  .project-card__visual {
+    flex: 1.25;
+    min-width: 0;
+  }
 }
 
 .project-card__header {
