@@ -11,7 +11,7 @@ export const Certifications: React.FC = () => {
         {/* CREDENTIALS */}
         <div className="section-header">
           <h2 className="section-title">CREDENTIALS</h2>
-          <div className="section-line"></div>
+          <div className="section-line" />
         </div>
 
         <div className="certs__list">
@@ -35,24 +35,39 @@ export const Certifications: React.FC = () => {
           ))}
         </div>
 
-        {/* EDUCATION */}
-        <div className="edu">
-          <div className="section-header" style={{ marginTop: '5rem' }}>
-            <h2 className="section-title">EDUCATION</h2>
-            <div className="section-line"></div>
-          </div>
+        {/* EXPERIENCE */}
+        <div className="section-header" style={{ marginTop: '5rem' }}>
+          <h2 className="section-title">EXPERIENCE</h2>
+          <div className="section-line" />
+        </div>
 
-          <div className="edu__block">
-            <div className="edu__left">
-              <p className="edu__degree">{profileData.degree}</p>
-              <p className="edu__uni">{profileData.university} &middot; {profileData.campus}</p>
-              <p className="edu__duration">{profileData.duration}</p>
+        <div className="certs__list">
+          <div className="cert-item">
+            <div className="cert-item__left">
+              <span className="cert-item__code">2024</span>
+              <span className="cert-item__name">AI &amp; Data Learning Program</span>
+              <span className="cert-item__meta">Infosys Springboard &middot; Learning Program</span>
             </div>
-            <div className="edu__right">
-              <p className="edu__note">
-                Focused on AI systems, data engineering, machine learning, and scientific computing.
-              </p>
-            </div>
+            <span className="cert-item__tag">Python · Data Analysis · AI Fundamentals</span>
+          </div>
+        </div>
+
+        {/* EDUCATION */}
+        <div className="section-header" style={{ marginTop: '5rem' }}>
+          <h2 className="section-title">EDUCATION</h2>
+          <div className="section-line" />
+        </div>
+
+        <div className="edu__block">
+          <div className="edu__left">
+            <p className="edu__degree">{profileData.degree}</p>
+            <p className="edu__uni">{profileData.university} &middot; {profileData.campus}</p>
+          </div>
+          <div className="edu__right">
+            <p className="edu__duration">{profileData.duration}</p>
+            <p className="edu__note">
+              Focused on AI systems, data engineering, machine learning, and scientific computing.
+            </p>
           </div>
         </div>
 

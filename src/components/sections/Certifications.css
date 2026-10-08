@@ -76,6 +76,16 @@
   color: var(--text-primary);
 }
 
+.cert-item__tag {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 /* Education */
 .edu__block {
   display: grid;

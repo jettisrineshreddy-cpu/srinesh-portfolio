@@ -11,8 +11,8 @@ export function useGsapAnimations() {
   useEffect(() => {
     if (prefersReduced) return;
 
-    // ─── HERO (delayed to wait for loader ~2s) ───────────────────────────
-    const heroTl = gsap.timeline({ delay: 2.2 });
+    // ─── HERO (delayed to wait for loader) ───────────────────────────
+    const heroTl = gsap.timeline({ delay: 1.5 });
     heroTl
       .fromTo('.hero__status',    { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
       .fromTo('.hero__title-line',{ opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power4.out' }, '-=0.4')
@@ -32,8 +32,6 @@ export function useGsapAnimations() {
       );
     });
 
-    // ─── ABOUT (Handled internally in About.tsx) ──────────────────────────
-
     // ─── SKILLS ───────────────────────────────────────────────────────────
     gsap.fromTo('.skill-col',
       { opacity: 0, y: 30 },
@@ -41,16 +39,6 @@ export function useGsapAnimations() {
         opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
         stagger: 0.1,
         scrollTrigger: { trigger: '#skills', start: 'top 75%' },
-      }
-    );
-
-    // ─── PROJECTS ─────────────────────────────────────────────────────────
-    gsap.fromTo('.project-entry',
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
-        stagger: 0.08,
-        scrollTrigger: { trigger: '#projects', start: 'top 80%' },
       }
     );
 
@@ -72,30 +60,6 @@ export function useGsapAnimations() {
         scrollTrigger: { trigger: '#contact', start: 'top 70%' },
       }
     );
-
-    // ─── INTERSTITIAL (if still present) ─────────────────────────────────
-    const interstitialTitle = document.querySelector('.interstitial__title');
-    if (interstitialTitle) {
-      gsap.fromTo('.interstitial__title',
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-          scrollTrigger: { trigger: '.interstitial__title', start: 'top 80%' },
-        }
-      );
-    }
-
-    const interstitialCards = document.querySelectorAll('.interstitial__card');
-    if (interstitialCards.length > 0) {
-      gsap.fromTo('.interstitial__card',
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
-          stagger: 0.12,
-          scrollTrigger: { trigger: '.interstitial__card', start: 'top 85%' },
-        }
-      );
-    }
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill());

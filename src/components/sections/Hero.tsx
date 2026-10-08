@@ -9,7 +9,7 @@ export const Hero: React.FC = () => {
       <div className="hero__container">
         
         <div className="hero__status">
-          <div className="status-indicator"></div>
+          <div className="status-indicator" />
           <span>Available for opportunities</span>
         </div>
 
@@ -19,12 +19,12 @@ export const Hero: React.FC = () => {
         </h1>
         
         <p className="hero__statement">
-          Building intelligent systems from data, models, and ideas.
+          {profileData.supportingStatement}
         </p>
 
         <div className="hero__actions">
           <Button variant="primary" href="#projects">
-            VIEW PROJECTS
+            VIEW WORK
           </Button>
           <Button
             variant="outline"
@@ -32,16 +32,23 @@ export const Hero: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            DOWNLOAD RESUME
+            RESUME &rarr;
           </Button>
         </div>
         
       </div>
-      
-      {/* Scroll indicator */}
+
+      {/* Scroll indicator — vertical text on the right */}
       <div className="hero__scroll-indicator" aria-hidden="true">
-        <span>Scroll</span>
-        <div className="hero__line"></div>
+        <span>SCROLL</span>
+        <div className="hero__line" />
+      </div>
+
+      {/* Bottom-right index metadata */}
+      <div className="hero__meta" aria-hidden="true">
+        <span>INDIA</span>
+        <span>B.TECH AI</span>
+        <span>2024 – 2028</span>
       </div>
     </section>
   );

@@ -11,12 +11,11 @@ export const Contact: React.FC = () => {
         <span className="contact__label">GET IN TOUCH</span>
 
         <h2 className="contact__headline">
-          LET&rsquo;S BUILD<br />SOMETHING USEFUL.
+          LET&rsquo;S BUILD<br />SOMETHING<br className="contact__br-mobile" /> USEFUL.
         </h2>
 
         <p className="contact__desc">
-          Have a project, internship opportunity, research idea, or collaboration?<br />
-          Let&rsquo;s talk.
+          Have a project, internship opportunity, or research idea? Let&rsquo;s talk.
         </p>
 
         <div className="contact__links">
@@ -39,14 +38,15 @@ export const Contact: React.FC = () => {
 
       <footer className="footer">
         <div className="footer__inner content-wrapper">
-          <div className="footer__rule" />
           <div className="footer__row">
             <span className="footer__name">J. SRINESH</span>
             <span className="footer__tagline">AI &times; DATA &times; ENGINEERING</span>
-            <span className="footer__year">&copy; {year}</span>
-            <a href="#hero" className="footer__top" aria-label="Back to top">
-              &uarr; TOP
-            </a>
+            <div className="footer__right">
+              <span className="footer__year">&copy; {year}</span>
+              <a href="#hero" className="footer__top" aria-label="Back to top">
+                &uarr; TOP
+              </a>
+            </div>
           </div>
         </div>
       </footer>
