@@ -37,6 +37,17 @@ export const Navbar: React.FC = () => {
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
   const close = () => setMobileOpen(false);
 
   return (
