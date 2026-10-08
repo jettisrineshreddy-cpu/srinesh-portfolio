@@ -82,9 +82,9 @@ export const ParticleField: React.FC<ParticleFieldProps> = ({
     <instancedMesh ref={meshRef} args={[undefined, undefined, count]}>
       <sphereGeometry args={[0.04, 6, 6]} />
       <meshBasicMaterial
-        color="#00f0ff"
+        color="#ffffff"
         transparent
-        opacity={0.6}
+        opacity={0.25}
         depthWrite={false}
       />
     </instancedMesh>

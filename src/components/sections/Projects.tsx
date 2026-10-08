@@ -37,11 +37,13 @@ export const Projects: React.FC = () => {
         }
       });
 
+      const visualWrapper = entry.querySelector('.project-showcase__visual-wrapper');
+      
       tl.fromTo(entry.querySelector('.project-showcase__header'), 
         { opacity: 0, y: 30 }, 
         { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
       )
-      .fromTo(entry.querySelector('.project-showcase__visual-wrapper'),
+      .fromTo(visualWrapper,
         { opacity: 0, scale: 0.97, y: 20 },
         { opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power3.out' },
         '-=0.4'
@@ -51,6 +53,44 @@ export const Projects: React.FC = () => {
         { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
         '-=0.6'
       );
+
+      // Mouse parallax for image tracking
+      if (visualWrapper) {
+        visualWrapper.addEventListener('mouseenter', () => {
+          const img = visualWrapper.querySelector('img') || visualWrapper.querySelector('.project-showcase__abstract');
+          if (img) gsap.to(img, { scale: 1.05, duration: 0.6, ease: 'power2.out' });
+        });
+
+        visualWrapper.addEventListener('mousemove', ((e: Event) => {
+          const mouseEvent = e as MouseEvent;
+          const rect = visualWrapper.getBoundingClientRect();
+          const x = (mouseEvent.clientX - rect.left) / rect.width - 0.5;
+          const y = (mouseEvent.clientY - rect.top) / rect.height - 0.5;
+          const img = visualWrapper.querySelector('img') || visualWrapper.querySelector('.project-showcase__abstract');
+          
+          if (img) {
+            gsap.to(img, {
+              x: x * 20,
+              y: y * 20,
+              duration: 1,
+              ease: 'power2.out'
+            });
+          }
+        }) as EventListener);
+
+        visualWrapper.addEventListener('mouseleave', () => {
+          const img = visualWrapper.querySelector('img') || visualWrapper.querySelector('.project-showcase__abstract');
+          if (img) {
+            gsap.to(img, {
+              x: 0,
+              y: 0,
+              scale: 1,
+              duration: 1,
+              ease: 'power2.out'
+            });
+          }
+        });
+      }
     });
 
     return () => {

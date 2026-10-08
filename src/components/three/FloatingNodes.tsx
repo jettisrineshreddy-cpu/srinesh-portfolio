@@ -99,9 +99,9 @@ export const FloatingNodes: React.FC<FloatingNodesProps> = ({
           <mesh key={i} position={node.position.toArray()}>
             <octahedronGeometry args={[node.size, 0]} />
             <meshBasicMaterial
-              color="#8b5cf6"
+              color="#ffffff"
               transparent
-              opacity={0.5}
+              opacity={0.15}
               wireframe
             />
           </mesh>
@@ -119,9 +119,9 @@ export const FloatingNodes: React.FC<FloatingNodesProps> = ({
           />
         </bufferGeometry>
         <lineBasicMaterial
-          color="#8b5cf6"
+          color="#ffffff"
           transparent
-          opacity={0.12}
+          opacity={0.05}
           depthWrite={false}
         />
       </lineSegments>

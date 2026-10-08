@@ -56,11 +56,12 @@
   font-size: 0.875rem;
   color: var(--text-muted);
   line-height: 1.4;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), transform var(--transition-normal);
 }
 
 .skill-col:hover .skill-col__item {
   color: var(--text-secondary);
+  transform: translateX(4px);
 }
 
 @media (max-width: 1024px) {

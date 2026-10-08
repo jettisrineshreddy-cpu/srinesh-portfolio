@@ -54,7 +54,7 @@ export const CustomCursor: React.FC = () => {
       // Project cards
       else if (target.closest('.project-card')) {
         cursor.classList.add('is-viewing');
-        if (cursorTextRef.current) cursorTextRef.current.innerText = 'VIEW';
+        if (cursorTextRef.current) cursorTextRef.current.innerText = 'VIEW →';
       }
       else {
         cursor.classList.remove('is-hovering', 'is-viewing');
