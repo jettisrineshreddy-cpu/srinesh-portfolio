@@ -27,32 +27,32 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     tl.to(text1Ref.current, {
       y: 0,
       opacity: 1,
-      duration: 0.4,
+      duration: 0.3,
       ease: 'power3.out',
     })
     .to(text1Ref.current, {
       y: -20,
       opacity: 0,
-      duration: 0.3,
+      duration: 0.25,
       ease: 'power3.in',
-      delay: 0.2
+      delay: 0.15
     })
     .to(text2Ref.current, {
       y: 0,
       opacity: 1,
-      duration: 0.4,
+      duration: 0.3,
       ease: 'power3.out',
-    })
+    }, "-=0.1")
     .to(text2Ref.current, {
       y: -20,
       opacity: 0,
-      duration: 0.3,
+      duration: 0.25,
       ease: 'power3.in',
-      delay: 0.2
+      delay: 0.15
     })
     .to(loaderRef.current, {
       yPercent: -100,
-      duration: 0.6,
+      duration: 0.5,
       ease: 'power4.inOut',
     });
 

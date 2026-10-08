@@ -7,7 +7,7 @@ export const ResearchCloud: React.FC = () => {
     <section id="research" className="research-cloud section-padding">
       <div className="content-wrapper">
         <div className="section-header">
-          <h2 className="section-title">LEARNING & RESEARCH</h2>
+          <h2 className="section-title">CURRENT FOCUS</h2>
           <div className="section-line"></div>
         </div>
 

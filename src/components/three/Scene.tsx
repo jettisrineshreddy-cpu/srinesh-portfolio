@@ -19,8 +19,8 @@ export const Scene: React.FC = () => {
   const prefersReduced = useReducedMotion();
   const { particleCount, dpr, isMobile } = useDeviceCapabilities();
 
-  // Graceful static fallback if WebGL is not available
-  if (!hasWebGL) {
+  // Graceful static fallback if WebGL is not available, or on mobile for max scroll performance
+  if (!hasWebGL || isMobile) {
     return <div className="webgl-fallback" aria-hidden="true" />;
   }
 

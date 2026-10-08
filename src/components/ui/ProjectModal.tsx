@@ -101,20 +101,16 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               </div>
             </div>
 
-            <div className="project-modal__section">
-              <h3>LINKS</h3>
-              <div className="project-modal__links">
-                {hasLink ? (
+            {hasLink && (
+              <div className="project-modal__section">
+                <h3>LINKS</h3>
+                <div className="project-modal__links">
                   <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="project-modal__link-btn">
                     <GithubIcon size={16} /> VIEW REPOSITORY
                   </a>
-                ) : (
-                  <span className="project-modal__link-btn project-modal__link-btn--disabled">
-                    LINK COMING SOON
-                  </span>
-                )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 
