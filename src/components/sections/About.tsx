@@ -1,85 +1,91 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { profileData } from '../../data/profile';
-import { experienceData } from '../../data/experience';
+import { AboutVisual } from './AboutVisual';
 import './About.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export const About: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 75%',
+      }
+    });
+
+    tl.fromTo('.about__label', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
+      .fromTo('.about__statement-line', { opacity: 0, y: 40, rotateX: -15 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out' }, '-=0.2')
+      .fromTo('.about__meta-item', { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, '-=0.6')
+      .fromTo('.about__body-text', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+      .fromTo('.about__visual-container', { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' }, '-=0.4');
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.trigger === containerRef.current && t.kill());
+    };
+  }, []);
+
   return (
-    <section id="about" className="about section-padding">
+    <section id="about" className="about section-padding" ref={containerRef}>
       <div className="content-wrapper">
-        <div className="section-header">
-          <h2 className="section-title">ABOUT</h2>
-          <div className="section-line"></div>
-        </div>
-
-        <div className="about__grid">
-          {/* Left: Statement */}
-          <div className="about__left">
-            <p className="about__heading">
-              I'm a B.Tech Artificial Intelligence student building practical systems at the intersection of data, AI, and engineering.
-            </p>
-            <p className="about__desc">
-              {profileData.careerDirection} I enjoy taking raw datasets and engineering them into clean, actionable models that solve real-world problems.
-            </p>
-
-            <ul className="about__list" aria-label="Focus areas">
-              {profileData.positioning.map((item, i) => (
-                <li key={i} className="about__list-item">
-                  <span className="about__list-arrow">&rarr;</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            {/* Experience block */}
-            <div className="about__experience">
-              <h3 className="about__exp-label">EXPERIENCE</h3>
-              <div className="about__exp-divider" />
-              {experienceData.map((exp) => (
-                <div key={exp.id} className="about__exp-item">
-                  <span className="about__exp-year">{exp.period}</span>
-                  <div className="about__exp-details">
-                    <span className="about__exp-role">{exp.role}</span>
-                    <span className="about__exp-org">{exp.organization}</span>
-                    <span className="about__exp-tech">{exp.type} &middot; {exp.technologies.join(', ')}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+        
+        <div className="about__top-grid">
+          <div className="about__top-left">
+            <span className="about__label">ABOUT &mdash; J. SRINESH</span>
+            <h2 className="about__statement">
+              <div className="about__statement-mask"><span className="about__statement-line">Building intelligent systems</span></div>
+              <div className="about__statement-mask"><span className="about__statement-line">from data, models, and ideas.</span></div>
+            </h2>
           </div>
-
-          {/* Right: Metadata */}
-          <div className="about__right">
-            <div className="about__meta">
-              <div className="about__meta-row">
-                <span className="about__meta-key">LOCATION</span>
-                <span className="about__meta-value">India</span>
-              </div>
-              <div className="about__meta-divider" />
-              <div className="about__meta-row">
+          
+          <div className="about__top-right">
+            <div className="about__metadata">
+              <div className="about__meta-item">
                 <span className="about__meta-key">EDUCATION</span>
-                <span className="about__meta-value">
-                  B.Tech Artificial Intelligence<br />
-                  {profileData.university}<br />
-                  <span className="about__meta-sub">{profileData.duration}</span>
-                </span>
+                <span className="about__meta-value">{profileData.degree}</span>
               </div>
-              <div className="about__meta-divider" />
-              <div className="about__meta-row">
+              <div className="about__meta-item">
+                <span className="about__meta-key">UNIVERSITY</span>
+                <span className="about__meta-value">{profileData.university}</span>
+              </div>
+              <div className="about__meta-item">
+                <span className="about__meta-key">PERIOD</span>
+                <span className="about__meta-value">{profileData.duration}</span>
+              </div>
+              <div className="about__meta-item">
                 <span className="about__meta-key">FOCUS</span>
-                <span className="about__meta-value">AI &times; Data &times; Engineering</span>
+                <span className="about__meta-value">AI / DATA / ENGINEERING</span>
               </div>
-              <div className="about__meta-divider" />
-              <div className="about__meta-row">
-                <span className="about__meta-key">STATUS</span>
-                <span className="about__meta-value about__meta-value--available">
-                  <span className="about__status-dot" />
-                  Open to Opportunities
-                </span>
+              <div className="about__meta-item">
+                <span className="about__meta-key">LOCATION</span>
+                <span className="about__meta-value">INDIA</span>
               </div>
             </div>
           </div>
         </div>
+
+        <div className="about__bottom-grid">
+          <div className="about__bottom-left">
+            <p className="about__body-text">
+              I am a {profileData.status} interested in the practical application of technology. {profileData.careerDirection}
+            </p>
+            <p className="about__body-text">
+              {profileData.supportingStatement}
+            </p>
+          </div>
+          <div className="about__bottom-right">
+            <div className="about__visual-container">
+              <AboutVisual />
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );

@@ -32,17 +32,7 @@ export function useGsapAnimations() {
       );
     });
 
-    // ─── ABOUT ────────────────────────────────────────────────────────────
-    gsap.fromTo('.about__left',
-      { opacity: 0, x: -40 },
-      { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out',
-        scrollTrigger: { trigger: '.about__grid', start: 'top 75%' } }
-    );
-    gsap.fromTo('.about__right',
-      { opacity: 0, x: 40 },
-      { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out',
-        scrollTrigger: { trigger: '.about__grid', start: 'top 75%' } }
-    );
+    // ─── ABOUT (Handled internally in About.tsx) ──────────────────────────
 
     // ─── SKILLS ───────────────────────────────────────────────────────────
     gsap.fromTo('.skill-col',
