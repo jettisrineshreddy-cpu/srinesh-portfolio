@@ -96,9 +96,17 @@
 .hero__statement {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: var(--text-secondary);
-  max-width: 520px;
+  max-width: 560px;
   line-height: 1.65;
   margin-bottom: 3rem;
+}
+
+.hero__br {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .hero__br { display: none; }
 }
 
 .hero__actions {

@@ -87,49 +87,11 @@
   white-space: nowrap;
 }
 
-/* Education */
-.edu__block {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: start;
-}
-
-.edu__degree {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-}
-
-.edu__uni {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  margin-bottom: 0.35rem;
-}
-
-.edu__duration {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
-}
-
-.edu__note {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  padding-top: 0.4rem;
-}
 
 @media (max-width: 768px) {
   .cert-item {
     flex-direction: column;
     align-items: flex-start;
   }
-
-  .edu__block {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
 }
+

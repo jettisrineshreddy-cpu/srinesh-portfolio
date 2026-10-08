@@ -21,7 +21,7 @@ export const projectsData: Project[] = [
     id: "pubg-analytics",
     title: "PUBG Player Performance & Behavioral Analytics",
     subtitle: "Large-Scale Match & Behavioral Data Analytics",
-    domain: "Gaming / Data Analytics",
+    domain: "DATA ANALYTICS",
     featured: true,
     technologies: ["SQL Server", "T-SQL", "Power BI", "Python", "Pandas"],
     datasetOrScope: "PUBG dataset containing approximately 4.4 million records",
@@ -44,7 +44,7 @@ export const projectsData: Project[] = [
     id: "medtrack-dv",
     title: "MedTrack_DV — Hospital Operations & Patient Analytics",
     subtitle: "Healthcare Operations & Resource Optimization",
-    domain: "Healthcare Operations Analytics",
+    domain: "DATA ANALYTICS",
     featured: true,
     technologies: [
       "Python",
@@ -86,7 +86,7 @@ export const projectsData: Project[] = [
     id: "ecommerce-analytics",
     title: "E-Commerce Analytics Pipeline & Dashboard",
     subtitle: "API-Driven Business & Customer Analytics",
-    domain: "E-Commerce / Business Analytics",
+    domain: "DATA ENGINEERING",
     featured: true,
     technologies: [
       "APIs",
@@ -119,7 +119,7 @@ export const projectsData: Project[] = [
     id: "hr-analytics",
     title: "HR Analytics Dashboard",
     subtitle: "Workforce Metrics & Organizational Insights",
-    domain: "Human Resources / Business Analytics",
+    domain: "DATA ANALYTICS",
     featured: false,
     technologies: ["Power BI", "Excel", "Data Analysis", "Data Visualization"],
     summary:
@@ -139,7 +139,7 @@ export const projectsData: Project[] = [
     id: "python-cicd",
     title: "Python CI/CD Automation Demo",
     subtitle: "Automated Build, Test & Deployment Pipeline",
-    domain: "Software Engineering / DevOps",
+    domain: "ENGINEERING",
     featured: false,
     technologies: ["Python", "GitHub", "GitHub Actions", "Render", "CI/CD"],
     summary:
@@ -158,7 +158,7 @@ export const projectsData: Project[] = [
     id: "robot-path-tracking",
     title: "Autonomous Mobile Robot Path Tracking",
     subtitle: "Pure Pursuit & Stanley Controller Implementation",
-    domain: "Robotics / Control Systems",
+    domain: "AI / ROBOTICS",
     featured: false,
     technologies: ["MATLAB", "Simulink", "Robotics & Control Concepts"],
     summary:

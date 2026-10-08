@@ -10,7 +10,7 @@ export const Hero: React.FC = () => {
         
         <div className="hero__status">
           <div className="status-indicator" />
-          <span>Available for opportunities</span>
+          <span>Open to opportunities &mdash; 2024–2028</span>
         </div>
 
         <h1 className="hero__title">
@@ -19,7 +19,8 @@ export const Hero: React.FC = () => {
         </h1>
         
         <p className="hero__statement">
-          {profileData.supportingStatement}
+          Building data-driven systems, analytics solutions,<br className="hero__br" />
+          and intelligent applications from first principles.
         </p>
 
         <div className="hero__actions">

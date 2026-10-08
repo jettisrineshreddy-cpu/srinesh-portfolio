@@ -8,8 +8,40 @@ export const Certifications: React.FC = () => {
     <section id="certifications" className="certifications section-padding">
       <div className="content-wrapper">
 
-        {/* CREDENTIALS */}
+        {/* EDUCATION — top and most important */}
         <div className="section-header">
+          <h2 className="section-title">EDUCATION</h2>
+          <div className="section-line" />
+        </div>
+
+        <div className="edu__block cert-item">
+          <div className="cert-item__left">
+            <span className="cert-item__code">{profileData.duration}</span>
+            <span className="cert-item__name">{profileData.degree}</span>
+            <span className="cert-item__meta">{profileData.university} &middot; {profileData.campus}</span>
+          </div>
+          <span className="cert-item__tag">AI Systems &middot; Data Engineering &middot; Machine Learning &middot; Scientific Computing</span>
+        </div>
+
+        {/* EXPERIENCE */}
+        <div className="section-header" style={{ marginTop: '5rem' }}>
+          <h2 className="section-title">EXPERIENCE</h2>
+          <div className="section-line" />
+        </div>
+
+        <div className="certs__list">
+          <div className="cert-item">
+            <div className="cert-item__left">
+              <span className="cert-item__code">2024</span>
+              <span className="cert-item__name">AI &amp; Data Learning Program</span>
+              <span className="cert-item__meta">Infosys Springboard &middot; Learning Program</span>
+            </div>
+            <span className="cert-item__tag">Python &middot; Data Analysis &middot; AI Fundamentals</span>
+          </div>
+        </div>
+
+        {/* CREDENTIALS */}
+        <div className="section-header" style={{ marginTop: '5rem' }}>
           <h2 className="section-title">CREDENTIALS</h2>
           <div className="section-line" />
         </div>
@@ -33,42 +65,6 @@ export const Certifications: React.FC = () => {
               </a>
             </div>
           ))}
-        </div>
-
-        {/* EXPERIENCE */}
-        <div className="section-header" style={{ marginTop: '5rem' }}>
-          <h2 className="section-title">EXPERIENCE</h2>
-          <div className="section-line" />
-        </div>
-
-        <div className="certs__list">
-          <div className="cert-item">
-            <div className="cert-item__left">
-              <span className="cert-item__code">2024</span>
-              <span className="cert-item__name">AI &amp; Data Learning Program</span>
-              <span className="cert-item__meta">Infosys Springboard &middot; Learning Program</span>
-            </div>
-            <span className="cert-item__tag">Python · Data Analysis · AI Fundamentals</span>
-          </div>
-        </div>
-
-        {/* EDUCATION */}
-        <div className="section-header" style={{ marginTop: '5rem' }}>
-          <h2 className="section-title">EDUCATION</h2>
-          <div className="section-line" />
-        </div>
-
-        <div className="edu__block">
-          <div className="edu__left">
-            <p className="edu__degree">{profileData.degree}</p>
-            <p className="edu__uni">{profileData.university} &middot; {profileData.campus}</p>
-          </div>
-          <div className="edu__right">
-            <p className="edu__duration">{profileData.duration}</p>
-            <p className="edu__note">
-              Focused on AI systems, data engineering, machine learning, and scientific computing.
-            </p>
-          </div>
         </div>
 
       </div>
