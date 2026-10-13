@@ -3,3 +3,13 @@
   display: flex;
   flex-direction: column;
 }
+
+.portfolio-app.is-3d-room-mode {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.portfolio-app.is-3d-room-mode .webgl-container {
+  pointer-events: auto;
+  z-index: 50;
+}

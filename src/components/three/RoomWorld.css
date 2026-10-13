@@ -1,0 +1,326 @@
+/* 3D Virtual Room World UI Styles */
+
+.room-screen-terminal,
+.room-biometric-panel,
+.room-exp-panel,
+.room-comms-panel {
+  user-select: none;
+  pointer-events: auto;
+}
+
+/* Central Ultrawide Screen Panel */
+.terminal-panel {
+  width: 580px;
+  background: rgba(10, 14, 22, 0.92);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 6px;
+  box-shadow: 0 0 35px rgba(59, 130, 246, 0.15), inset 0 0 20px rgba(10, 25, 45, 0.6);
+  padding: 1.5rem 1.75rem;
+  font-family: var(--font-sans);
+  color: #f1f5f9;
+  backdrop-filter: blur(12px);
+}
+
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+
+.terminal-tag {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+.terminal-status {
+  color: #4ade80;
+}
+
+.terminal-project-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #94a3b8;
+  letter-spacing: 0.1em;
+}
+
+.terminal-project-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0.4rem 0 0.6rem;
+  color: #ffffff;
+}
+
+.terminal-project-summary {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+.terminal-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.terminal-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  color: #93c5fd;
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.terminal-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1rem;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f8fafc;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.terminal-btn:hover {
+  background: #2563eb;
+  border-color: #60a5fa;
+  color: #ffffff;
+}
+
+.terminal-btn--cta {
+  margin-left: auto;
+  background: #1e3a8a;
+  border-color: #3b82f6;
+}
+
+/* Biometric Archive Station */
+.bio-card {
+  width: 320px;
+  background: rgba(8, 12, 18, 0.94);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 6px;
+  padding: 1.25rem;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.bio-card:hover {
+  transform: translateY(-4px);
+  border-color: #38bdf8;
+}
+
+.bio-photo-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 1rem;
+}
+
+.bio-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05);
+}
+
+.bio-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+  animation: scanDown 3s linear infinite;
+}
+
+@keyframes scanDown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(220px); }
+}
+
+.bio-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: #38bdf8;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.bio-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.bio-degree {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-bottom: 0.2rem;
+}
+
+.bio-inst {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-bottom: 0.6rem;
+}
+
+.bio-status {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #4ade80;
+  letter-spacing: 0.1em;
+}
+
+/* Expedition / Experience Station */
+.exp-card {
+  width: 340px;
+  background: rgba(8, 12, 18, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 1.25rem;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.exp-card:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+}
+
+.exp-badge {
+  color: #f8fafc;
+}
+
+.exp-count {
+  color: #38bdf8;
+}
+
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.exp-row {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid #38bdf8;
+  padding-left: 0.6rem;
+}
+
+.exp-period {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: #64748b;
+}
+
+.exp-org {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.exp-role {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.exp-certs-preview {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #cbd5e1;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.exp-certs-tag {
+  color: #60a5fa;
+}
+
+/* Comms Array Station */
+.comms-card {
+  width: 290px;
+  background: rgba(12, 16, 24, 0.95);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  border-radius: 6px;
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+}
+
+.comms-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: #60a5fa;
+  letter-spacing: 0.15em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.comms-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.comms-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.comms-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  padding: 0.6rem 0.8rem;
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.comms-link:hover {
+  background: #2563eb;
+  border-color: #60a5fa;
+}

@@ -8,20 +8,31 @@ import { DataGrid } from './DataGrid';
 import { FloatingNodes } from './FloatingNodes';
 import { HeroCenterpiece } from './HeroCenterpiece';
 import { ScrollRig } from './ScrollRig';
+import { RoomWorld, type RoomStationId } from './RoomWorld';
+
+interface SceneProps {
+  is3DMode?: boolean;
+  currentStation?: RoomStationId;
+  onSelectStation?: (id: RoomStationId) => void;
+}
 
 /**
  * The main 3D scene container.
- * - Detects WebGL availability → falls back to a polished static gradient if unavailable.
- * - Respects prefers-reduced-motion → dramatically slows/disables animation.
- * - Adapts particle count and DPR to device capabilities.
+ * - Supports dual modes:
+ *   1. Ambient Spatial Editorial Scene (background for main page)
+ *   2. Full WebGL 3D Room / Workstation World (immersive walk-through)
  */
-export const Scene: React.FC = () => {
+export const Scene: React.FC<SceneProps> = ({
+  is3DMode = false,
+  currentStation = 'overview',
+  onSelectStation = () => {},
+}) => {
   const hasWebGL = isWebGLAvailable();
   const prefersReduced = useReducedMotion();
   const { particleCount, dpr, isMobile } = useDeviceCapabilities();
 
-  // Graceful static fallback if WebGL is not available, or on mobile for max scroll performance
-  if (!hasWebGL || isMobile) {
+  // Graceful static fallback if WebGL is not available
+  if (!hasWebGL) {
     return <div className="webgl-fallback" aria-hidden="true" />;
   }
 
@@ -41,31 +52,40 @@ export const Scene: React.FC = () => {
         }}
       >
         <Suspense fallback={null}>
-          <ScrollRig reducedMotion={prefersReduced} />
-          
-          {/* Ambient atmospheric light */}
-          <ambientLight intensity={0.3} />
-
-          {/* Particle field: the primary visual element */}
-          <ParticleField
-            count={particleCount}
-            spread={30}
-            reducedMotion={prefersReduced}
-          />
-
-          {/* Data grid floor */}
-          <DataGrid reducedMotion={prefersReduced} />
-
-          {/* Floating geometric nodes (skip on low-end mobile to save perf) */}
-          {!isMobile && (
+          {is3DMode ? (
+            <RoomWorld
+              currentStation={currentStation}
+              onSelectStation={onSelectStation}
+            />
+          ) : (
             <>
-              <FloatingNodes
-                count={18}
+              <ScrollRig reducedMotion={prefersReduced} />
+              
+              {/* Ambient atmospheric light */}
+              <ambientLight intensity={0.3} />
+
+              {/* Particle field: the primary visual element */}
+              <ParticleField
+                count={particleCount}
+                spread={30}
                 reducedMotion={prefersReduced}
               />
-              <HeroCenterpiece
-                reducedMotion={prefersReduced}
-              />
+
+              {/* Data grid floor */}
+              <DataGrid reducedMotion={prefersReduced} />
+
+              {/* Floating geometric nodes (skip on low-end mobile to save perf) */}
+              {!isMobile && (
+                <>
+                  <FloatingNodes
+                    count={18}
+                    reducedMotion={prefersReduced}
+                  />
+                  <HeroCenterpiece
+                    reducedMotion={prefersReduced}
+                  />
+                </>
+              )}
             </>
           )}
         </Suspense>
