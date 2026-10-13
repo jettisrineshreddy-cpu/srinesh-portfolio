@@ -6,6 +6,7 @@ import { useDeviceCapabilities } from '../../hooks/useDeviceCapabilities';
 import { ParticleField } from './ParticleField';
 import { DataGrid } from './DataGrid';
 import { FloatingNodes } from './FloatingNodes';
+import { HeroCenterpiece } from './HeroCenterpiece';
 import { ScrollRig } from './ScrollRig';
 
 /**
@@ -57,10 +58,15 @@ export const Scene: React.FC = () => {
 
           {/* Floating geometric nodes (skip on low-end mobile to save perf) */}
           {!isMobile && (
-            <FloatingNodes
-              count={18}
-              reducedMotion={prefersReduced}
-            />
+            <>
+              <FloatingNodes
+                count={18}
+                reducedMotion={prefersReduced}
+              />
+              <HeroCenterpiece
+                reducedMotion={prefersReduced}
+              />
+            </>
           )}
         </Suspense>
       </Canvas>

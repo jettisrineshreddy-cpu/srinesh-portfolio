@@ -84,13 +84,13 @@
 }
 
 .cert-item__tag {
-  flex-shrink: 0;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   color: var(--text-dim);
   text-transform: uppercase;
-  white-space: nowrap;
+  max-width: 100%;
+  word-break: break-word;
 }
 
 /* ─── Experience Section Specifics ─────────────────── */
@@ -106,10 +106,15 @@
   letter-spacing: 0.12em;
   color: var(--text-dim);
   text-transform: uppercase;
+  max-width: 100%;
 }
 
 .experience-progression {
   opacity: 0.85;
+  display: inline-block;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .experience__linkedin-cta {

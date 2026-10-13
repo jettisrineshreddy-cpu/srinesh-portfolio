@@ -35,7 +35,7 @@ export const profileData: Profile = {
   university: "Amrita Vishwa Vidyapeetham",
   campus: "Amaravati Campus",
   duration: "2024 – 2028",
-  status: "3rd-year B.Tech Artificial Intelligence student",
+  status: "B.Tech Artificial Intelligence student (2024–2028)",
   careerDirection:
     "Building career around Data Analytics, AI, data engineering, and practical software/data projects.",
   primaryIdentity:

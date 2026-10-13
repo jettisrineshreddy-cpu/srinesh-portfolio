@@ -15,8 +15,9 @@ export const About: React.FC = () => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!containerRef.current) return;
 
+    let tl: gsap.core.Timeline | null = null;
     if (!reduced) {
-      const tl = gsap.timeline({
+      tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 70%',
@@ -52,10 +53,24 @@ export const About: React.FC = () => {
     // Desktop-only: subtle GSAP parallax on photo hover
     const frame = photoRef.current;
     const img = photoImgRef.current;
-    if (!frame || !img || reduced) return;
+    if (!frame || !img || reduced) {
+      return () => {
+        if (tl) tl.kill();
+        ScrollTrigger.getAll().forEach(t => {
+          if (t.trigger === containerRef.current) t.kill();
+        });
+      };
+    }
 
     const isMobile = window.innerWidth < 768;
-    if (isMobile) return;
+    if (isMobile) {
+      return () => {
+        if (tl) tl.kill();
+        ScrollTrigger.getAll().forEach(t => {
+          if (t.trigger === containerRef.current) t.kill();
+        });
+      };
+    }
 
     const onEnter = () => {
       gsap.to(img, { scale: 1.04, duration: 0.6, ease: 'power2.out' });
@@ -75,6 +90,7 @@ export const About: React.FC = () => {
     frame.addEventListener('mouseleave', onLeave);
 
     return () => {
+      if (tl) tl.kill();
       frame.removeEventListener('mouseenter', onEnter);
       frame.removeEventListener('mousemove', onMove);
       frame.removeEventListener('mouseleave', onLeave);

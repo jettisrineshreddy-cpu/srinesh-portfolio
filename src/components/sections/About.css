@@ -50,7 +50,7 @@
   /* clip-path reveal starts here (GSAP controls) */
   clip-path: inset(0% 0% 0% 0%);
   opacity: 0; /* GSAP initial */
-  cursor: none;
+  cursor: default;
 }
 
 .about__photo-img {

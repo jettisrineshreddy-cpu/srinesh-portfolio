@@ -36,7 +36,7 @@ export const experienceData: Experience[] = [
     id: 'personifwy-1stop',
     role: 'Data Science Intern',
     organization: 'Personifwy / 1Stop',
-    period: 'Completed',
+    period: '2 Months · Completed',
     type: 'Internship',
     description:
       'Two-month internship completing practical machine learning and analytical tasks including hate speech detection, spam SMS classification, and credit exploratory data analysis.',

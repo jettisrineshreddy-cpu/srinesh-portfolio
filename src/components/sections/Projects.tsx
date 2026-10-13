@@ -12,9 +12,9 @@ gsap.registerPlugin(ScrollTrigger);
 const SHOWCASE_ORDER = [
   'pubg-analytics',
   'medtrack-dv',
-  'robot-path-tracking',
   'ecommerce-analytics',
-  'hr-analytics'
+  'hr-analytics',
+  'robot-path-tracking',
 ];
 
 export const Projects: React.FC = () => {
@@ -27,6 +27,7 @@ export const Projects: React.FC = () => {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    const cleanups: (() => void)[] = [];
     const entries = document.querySelectorAll('.project-showcase');
     
     entries.forEach((entry) => {
@@ -37,7 +38,7 @@ export const Projects: React.FC = () => {
         }
       });
 
-      const visualWrapper = entry.querySelector('.project-showcase__visual-wrapper');
+      const visualWrapper = entry.querySelector('.project-showcase__visual-wrapper') as HTMLElement | null;
       
       tl.fromTo(entry.querySelector('.project-showcase__header'), 
         { opacity: 0, y: 30 }, 
@@ -56,16 +57,15 @@ export const Projects: React.FC = () => {
 
       // Mouse parallax for image tracking
       if (visualWrapper) {
-        visualWrapper.addEventListener('mouseenter', () => {
+        const onMouseEnter = () => {
           const img = visualWrapper.querySelector('img') || visualWrapper.querySelector('.project-showcase__abstract');
           if (img) gsap.to(img, { scale: 1.05, duration: 0.6, ease: 'power2.out' });
-        });
+        };
 
-        visualWrapper.addEventListener('mousemove', ((e: Event) => {
-          const mouseEvent = e as MouseEvent;
+        const onMouseMove = (e: MouseEvent) => {
           const rect = visualWrapper.getBoundingClientRect();
-          const x = (mouseEvent.clientX - rect.left) / rect.width - 0.5;
-          const y = (mouseEvent.clientY - rect.top) / rect.height - 0.5;
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
           const img = visualWrapper.querySelector('img') || visualWrapper.querySelector('.project-showcase__abstract');
           
           if (img) {
@@ -76,9 +76,9 @@ export const Projects: React.FC = () => {
               ease: 'power2.out'
             });
           }
-        }) as EventListener);
+        };
 
-        visualWrapper.addEventListener('mouseleave', () => {
+        const onMouseLeave = () => {
           const img = visualWrapper.querySelector('img') || visualWrapper.querySelector('.project-showcase__abstract');
           if (img) {
             gsap.to(img, {
@@ -89,11 +89,22 @@ export const Projects: React.FC = () => {
               ease: 'power2.out'
             });
           }
+        };
+
+        visualWrapper.addEventListener('mouseenter', onMouseEnter);
+        visualWrapper.addEventListener('mousemove', onMouseMove);
+        visualWrapper.addEventListener('mouseleave', onMouseLeave);
+
+        cleanups.push(() => {
+          visualWrapper.removeEventListener('mouseenter', onMouseEnter);
+          visualWrapper.removeEventListener('mousemove', onMouseMove);
+          visualWrapper.removeEventListener('mouseleave', onMouseLeave);
         });
       }
     });
 
     return () => {
+      cleanups.forEach(fn => fn());
       ScrollTrigger.getAll().forEach(t => {
         if (t.trigger && (t.trigger as Element).classList?.contains('project-showcase')) {
           t.kill();

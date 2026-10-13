@@ -32,3 +32,9 @@ pnpm-debug.log*
 
 # Vercel
 .vercel/
+
+# Test Artifacts
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/

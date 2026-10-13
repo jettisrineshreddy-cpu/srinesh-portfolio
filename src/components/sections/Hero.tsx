@@ -10,7 +10,7 @@ export const Hero: React.FC = () => {
         
         <div className="hero__status">
           <div className="status-indicator" />
-          <span>Open to opportunities &mdash; 2024–2028</span>
+          <span>Open to Internships &amp; Opportunities</span>
         </div>
 
         <h1 className="hero__title">
@@ -26,6 +26,9 @@ export const Hero: React.FC = () => {
         <div className="hero__actions">
           <Button variant="primary" href="#projects">
             VIEW WORK
+          </Button>
+          <Button variant="outline" href="#contact">
+            CONTACT &rarr;
           </Button>
           <Button
             variant="outline"

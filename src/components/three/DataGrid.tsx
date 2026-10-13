@@ -44,9 +44,9 @@ export const DataGrid: React.FC<DataGridProps> = ({ reducedMotion = false }) => 
     <group ref={gridRef} position={[0, -8, 0]}>
       <lineSegments geometry={gridLines}>
         <lineBasicMaterial
-          color="#00f0ff"
+          color="#c2d1d9"
           transparent
-          opacity={0.06}
+          opacity={0.07}
           depthWrite={false}
         />
       </lineSegments>
