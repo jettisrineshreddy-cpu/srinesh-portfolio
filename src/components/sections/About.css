@@ -1,53 +1,58 @@
+/* ═══════════════════════════════════════════════════════════
+   ABOUT — Editorial two-column layout
+═══════════════════════════════════════════════════════════ */
+
 .about {
   position: relative;
   color: var(--text-primary);
 }
 
+/* Section label */
 .about__label {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
   color: var(--text-dim);
   margin-bottom: 2.5rem;
+  text-transform: uppercase;
   opacity: 0; /* GSAP initial */
 }
 
-/* ─── TOP ROW ──────────────────────────────── */
+/* ─── TOP GRID: Statement + Photo ─────────────────────── */
 .about__top-grid {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: 1fr 360px;
   gap: 5rem;
   margin-bottom: 6rem;
   align-items: end;
 }
 
+/* Statement — oversized editorial heading */
 .about__statement-mask {
   overflow: hidden;
-  padding-bottom: 0.2rem;
+  padding-bottom: 0.15rem;
 }
 
 .about__statement-line {
   display: block;
-  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
   color: var(--text-primary);
-  transform-origin: 0% 100%;
   opacity: 0; /* GSAP initial */
 }
 
-/* ─── PHOTO ────────────────────────────────── */
+/* ─── PHOTO ──────────────────────────────────────────── */
 .about__photo-frame {
   position: relative;
   width: 100%;
-  /* 4:5 portrait aspect ratio – editorial standard */
   aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: 2px;
   background: var(--bg-tertiary);
-  /* clip-path reveal starts here (GSAP controls) */
   clip-path: inset(0% 0% 0% 0%);
   opacity: 0; /* GSAP initial */
   cursor: default;
@@ -59,65 +64,63 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 10%;
+  object-position: center 12%;
   display: block;
-  /* Subtle desaturate-on-load: slight warmth for dark site cohesion */
-  filter: grayscale(8%) contrast(1.05) brightness(0.95);
-  transform-origin: center center;
-  /* GSAP controls transform — no CSS transition here */
+  filter: grayscale(6%) contrast(1.04) brightness(0.93);
   will-change: transform;
 }
 
-/* Bottom-left caption tag */
+/* Photo overlay caption */
 .about__photo-tag {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1.25rem 1rem 1rem;
-  background: linear-gradient(to top, rgba(5,5,5,0.75) 0%, transparent 100%);
+  padding: 1.5rem 1rem 1rem;
+  background: linear-gradient(to top, rgba(8, 8, 8, 0.8) 0%, transparent 100%);
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.25rem;
   opacity: 0; /* GSAP initial */
 }
 
 .about__photo-tag-name {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
   color: var(--text-primary);
+  text-transform: uppercase;
 }
 
 .about__photo-tag-role {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
   color: var(--text-muted);
+  text-transform: uppercase;
 }
 
-/* ─── BOTTOM ROW ───────────────────────────── */
+/* ─── BOTTOM GRID: Bio + Metadata ────────────────────── */
 .about__bottom-grid {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: 0.85fr 1.15fr;
   gap: 5rem;
   align-items: start;
 }
 
 .about__body-text {
-  font-size: 1.05rem;
+  font-family: var(--font-sans);
+  font-size: 1rem;
   color: var(--text-secondary);
-  line-height: 1.75;
+  line-height: 1.8;
   margin-bottom: 1.5rem;
-  max-width: 520px;
+  max-width: 500px;
   opacity: 0; /* GSAP initial */
 }
 
-.about__body-text:last-child {
-  margin-bottom: 0;
-}
+.about__body-text:last-child { margin-bottom: 0; }
 
-/* ─── METADATA TABLE ───────────────────────── */
+/* ─── METADATA TABLE ─────────────────────────────────── */
 .about__metadata {
   display: flex;
   flex-direction: column;
@@ -127,7 +130,7 @@
 .about__meta-item {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.3rem;
   padding: 1.1rem 0;
   border-bottom: 1px solid var(--glass-border);
   transition: padding-left var(--transition-normal), background var(--transition-normal);
@@ -135,24 +138,26 @@
 }
 
 .about__meta-item:hover {
-  padding-left: 0.75rem;
-  background: rgba(255, 255, 255, 0.01);
+  padding-left: 0.85rem;
+  background: rgba(255, 255, 255, 0.015);
 }
 
 .about__meta-key {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.15em;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
   color: var(--text-dim);
+  text-transform: uppercase;
 }
 
 .about__meta-value {
   font-size: 0.9rem;
   color: var(--text-secondary);
   font-weight: 500;
+  line-height: 1.45;
 }
 
-/* ─── RESPONSIVE ───────────────────────────── */
+/* ─── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 1100px) {
   .about__top-grid {
     grid-template-columns: 1fr 300px;
@@ -168,8 +173,7 @@
   }
 
   .about__photo-frame {
-    /* On tablet/mobile, cap width and centre */
-    max-width: 320px;
+    max-width: 300px;
     margin: 0 auto;
   }
 
@@ -185,11 +189,11 @@
 
 @media (max-width: 600px) {
   .about__photo-frame {
-    max-width: 260px;
+    max-width: 240px;
   }
 }
 
-/* ─── REDUCED MOTION OVERRIDE ──────────────── */
+/* ─── REDUCED MOTION ─────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .about__label,
   .about__statement-line,

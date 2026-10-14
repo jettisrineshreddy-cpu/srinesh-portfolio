@@ -141,10 +141,14 @@ export const About: React.FC = () => {
         <div className="about__bottom-grid">
           <div className="about__bottom-left">
             <p className="about__body-text">
-              I am a {profileData.status} interested in the practical application of technology. {profileData.careerDirection}
+              B.Tech Artificial Intelligence student at Amrita Vishwa Vidyapeetham (2024–2028).
+              My work sits at the intersection of data analytics, AI, and software engineering — building
+              systems that turn raw, messy data into something meaningful and useful.
             </p>
             <p className="about__body-text">
-              {profileData.supportingStatement}
+              I'm drawn to end-to-end work: defining the problem, wrangling the data, building the model or
+              dashboard, and making the result actionable. Whether that's a 4.4M-record analytics pipeline,
+              a healthcare operations dashboard, or an autonomous robot controller — I care about craft and clarity.
             </p>
           </div>
 

@@ -1,75 +1,86 @@
-/* Design System Variables - Premium Editorial Theme */
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — J. Srinesh Portfolio
+   Premium dark editorial theme. One accent. Intentional spacing.
+═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Color Palette - Deep Monochrome */
-  --bg-primary: #050505;
-  --bg-secondary: #0a0a0a;
-  --bg-tertiary: #121212;
-  --bg-card: rgba(18, 18, 18, 0.4);
-  --bg-card-hover: rgba(24, 24, 24, 0.8);
-  --bg-card-featured: rgba(20, 20, 20, 0.6);
+  /* ─── Color: Near-black foundations ─────────────────────── */
+  --bg-primary:    #080808;
+  --bg-secondary:  #0d0d0d;
+  --bg-tertiary:   #141414;
+  --bg-card:       rgba(16, 16, 16, 0.5);
+  --bg-card-hover: rgba(22, 22, 22, 0.9);
+  --bg-card-featured: rgba(18, 18, 18, 0.65);
 
-  /* Glassmorphism & Borders */
-  --glass-bg: rgba(10, 10, 10, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-hover: rgba(255, 255, 255, 0.2);
-  --glass-border-featured: rgba(255, 255, 255, 0.15);
-  --glass-blur: blur(20px);
+  /* ─── Borders / surfaces ────────────────────────────────── */
+  --glass-bg:             rgba(10, 10, 10, 0.75);
+  --glass-border:         rgba(255, 255, 255, 0.07);
+  --glass-border-hover:   rgba(255, 255, 255, 0.18);
+  --glass-border-strong:  rgba(255, 255, 255, 0.12);
+  --glass-blur:           blur(24px);
 
-  /* Accent Colors (Restrained) */
-  --accent-primary: #ffffff;
-  --accent-secondary: #888888;
-  /* Very subtle tint for special interactions, avoiding neon */
-  --accent-tint: #c2d1d9; 
+  /* ─── Single accent: warm blue-grey tint ───────────────── */
+  /* Used sparingly for the one "alive" element at a time     */
+  --accent:          #b8c9d5;   /* warm, desaturated, not neon  */
+  --accent-subtle:   rgba(184, 201, 213, 0.12);
+  --accent-border:   rgba(184, 201, 213, 0.25);
 
-  /* Typography Colors */
-  --text-primary: #f5f5f5;
-  --text-secondary: #a3a3a3;
-  --text-muted: #737373;
-  --text-dim: #525252;
-  --text-accent: #ffffff;
+  /* ─── Typography colors ─────────────────────────────────── */
+  --text-primary:   #f2f0ec;   /* warm white — not pure white */
+  --text-secondary: #9d9d97;
+  --text-muted:     #6b6b65;
+  --text-dim:       #484844;
 
-  /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-  /* Using a single strong font family for that editorial feel */
-  --font-heading: var(--font-sans);
+  /* ─── Fonts ──────────────────────────────────────────────── */
+  /* Display: Space Grotesk for oversized headings             */
+  /* Body: Inter for body text readability                     */
+  /* Mono: JetBrains Mono for code labels and metadata        */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  --font-heading: var(--font-display);
 
-  /* Spacing Scale */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2.5rem;
-  --space-2xl: 4rem;
-  --space-3xl: 8rem;
+  /* ─── Spacing (8pt grid) ────────────────────────────────── */
+  --space-xs:   0.25rem;   /* 4px  */
+  --space-sm:   0.5rem;    /* 8px  */
+  --space-md:   1rem;      /* 16px */
+  --space-lg:   1.5rem;    /* 24px */
+  --space-xl:   2.5rem;    /* 40px */
+  --space-2xl:  4rem;      /* 64px */
+  --space-3xl:  8rem;      /* 128px */
 
-  /* Layout */
-  --container-max-width: 1400px;
-  --nav-height: 80px;
+  /* ─── Layout ────────────────────────────────────────────── */
+  --container-max-width: 1440px;
+  --nav-height: 76px;
+  --section-gap: 10rem;
 
-  /* Transitions & Animation Timing */
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 300ms cubic-bezier(0.25, 1, 0.5, 1);
-  --transition-smooth: 600ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-slow: 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* ─── Motion ────────────────────────────────────────────── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --transition-fast:   150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 280ms var(--ease-out-quart);
+  --transition-smooth: 560ms var(--ease-out-expo);
+  --transition-slow:   900ms var(--ease-out-expo);
 
-  /* Border Radii (Sharper for editorial feel) */
+  /* ─── Radii (sharp editorial feel) ─────────────────────── */
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 8px;
+  --radius-xl: 16px;
   --radius-full: 9999px;
 
-  /* Elevation & Shadows */
-  --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 40px -10px rgba(255, 255, 255, 0.05);
+  /* ─── Shadows ───────────────────────────────────────────── */
+  --shadow-card: 0 12px 48px -12px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 60px -20px rgba(184, 201, 213, 0.06);
 }
 
-/* Reduced Motion Preference Override */
+/* ─── Reduced motion overrides ──────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --transition-fast: 0.01ms;
+    --transition-fast:   0.01ms;
     --transition-normal: 0.01ms;
     --transition-smooth: 0.01ms;
+    --transition-slow:   0.01ms;
   }
 }

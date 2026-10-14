@@ -1,3 +1,8 @@
+/* ═══════════════════════════════════════════════════════════
+   CONTACT — Memorable closing section
+   Oversized headline. Elegant link list. Clean footer.
+═══════════════════════════════════════════════════════════ */
+
 .contact {
   padding-top: 10rem;
   position: relative;
@@ -8,51 +13,50 @@
   padding-bottom: 8rem;
 }
 
+/* Section label */
 .contact__label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
   color: var(--text-dim);
   text-transform: uppercase;
   margin-bottom: 3rem;
 }
 
 /* GSAP initial state */
-.contact__headline {
-  opacity: 0;
-}
+.contact__headline { opacity: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .contact__headline { opacity: 1; }
 }
 
+/* Oversized display headline — the emotional anchor */
 .contact__headline {
-  font-size: clamp(3.5rem, 9vw, 8rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9.5vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
   color: var(--text-primary);
-  line-height: 1.0;
+  line-height: 0.95;
   margin-bottom: 3rem;
 }
 
-.contact__br {
-  display: block;
-}
+.contact__br { display: block; }
+@media (max-width: 600px) { .contact__br { display: none; } }
 
 .contact__desc {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 4rem;
-  max-width: 480px;
+  line-height: 1.75;
+  margin-bottom: 4.5rem;
+  max-width: 440px;
 }
 
-/* Links row */
+/* ─── Link rows ─────────────────────────────────────────── */
 .contact__links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0;
+  flex-direction: column;
   margin-bottom: 4rem;
   border-top: 1px solid var(--glass-border);
 }
@@ -60,55 +64,57 @@
 .contact__link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1.4rem 0;
-  padding-right: 3.5rem;
-  font-size: 0.8rem;
-  font-weight: 700;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.15em;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   text-decoration: none;
   text-transform: uppercase;
   border-bottom: 1px solid var(--glass-border);
-  width: 100%;
-  transition: color var(--transition-fast), background var(--transition-normal);
+  transition:
+    color var(--transition-fast),
+    padding-left var(--transition-normal),
+    background var(--transition-normal);
   position: relative;
 }
 
 .contact__link:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.018);
+  padding-left: 1rem;
 }
 
+.contact__link-label { /* text label */ }
+
 .contact__link-arrow {
-  position: absolute;
-  right: 0;
-  transition: transform var(--transition-normal);
   font-size: 1rem;
   color: var(--text-dim);
+  transition: transform var(--transition-normal), color var(--transition-fast);
 }
 
 .contact__link:hover .contact__link-arrow {
-  transform: translateX(6px);
+  transform: translateX(8px);
   color: var(--text-primary);
 }
 
+/* Email display — subtle mono type */
 .contact__email-display {
   font-family: var(--font-mono);
-  font-size: clamp(0.75rem, 1.5vw, 1rem);
+  font-size: clamp(0.7rem, 1.4vw, 0.9rem);
   color: var(--text-dim);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
-/* ─── FOOTER ──────────────────────────────── */
+/* ─── FOOTER ────────────────────────────────────────────── */
 .footer {
   border-top: 1px solid var(--glass-border);
-  padding: 2.5rem 0;
+  padding: 2.75rem 0;
 }
 
-.footer__rule {
-  display: none; /* rule is the border-top itself */
-}
+.footer__rule { display: none; }
 
 .footer__row {
   display: flex;
@@ -126,20 +132,20 @@
 }
 
 .footer__name {
-  font-size: 0.85rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   color: var(--text-primary);
-  transition: color var(--transition-fast);
+  text-transform: uppercase;
+  transition: opacity var(--transition-fast);
 }
 
-.footer__brand:hover .footer__name {
-  color: var(--text-muted);
-}
+.footer__brand:hover .footer__name { opacity: 0.55; }
 
 .footer__tagline {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   letter-spacing: 0.12em;
   color: var(--text-dim);
   text-transform: uppercase;
@@ -147,21 +153,19 @@
 
 .footer__links {
   display: flex;
-  gap: 2rem;
+  gap: 2.25rem;
 }
 
 .footer__link {
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
   color: var(--text-muted);
   text-decoration: none;
   text-transform: uppercase;
   transition: color var(--transition-fast);
 }
-
-.footer__link:hover {
-  color: var(--text-primary);
-}
+.footer__link:hover { color: var(--text-primary); }
 
 .footer__right {
   display: flex;
@@ -171,39 +175,30 @@
 
 .footer__year {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--text-dim);
 }
 
 .footer__top {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   letter-spacing: 0.1em;
   color: var(--text-muted);
   text-decoration: none;
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-normal);
   text-transform: uppercase;
   display: inline-block;
 }
-
 .footer__top:hover {
   color: var(--text-primary);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
-/* ─── RESPONSIVE ──────────────────────────── */
+/* ─── Responsive ────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .contact {
-    padding-top: 6rem;
-  }
-
-  .contact__link {
-    padding-right: 2.5rem;
-  }
-
-  .contact__br {
-    display: none;
-  }
+  .contact { padding-top: 6rem; }
 
   .footer__row {
     flex-direction: column;
@@ -211,17 +206,10 @@
     gap: 1.25rem;
   }
 
-  .footer__links {
-    gap: 1.5rem;
-  }
-
-  .footer__tagline {
-    display: none;
-  }
+  .footer__links { gap: 1.5rem; }
+  .footer__tagline { display: none; }
 }
 
 @media (max-width: 480px) {
-  .contact__links {
-    gap: 0;
-  }
+  .contact__link { padding-left: 0 !important; }
 }

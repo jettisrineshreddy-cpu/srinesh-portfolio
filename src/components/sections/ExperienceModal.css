@@ -1,18 +1,21 @@
+/* ═══════════════════════════════════════════════════════════
+   EXPERIENCE MODAL — Full-screen internship detail overlay
+═══════════════════════════════════════════════════════════ */
+
 .exp-modal {
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background: rgba(5, 5, 5, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(8, 8, 8, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   display: flex;
   justify-content: center;
   align-items: flex-start;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.38s ease;
   overflow-y: auto;
-  padding: 0;
 }
 
 .exp-modal.is-open {
@@ -27,14 +30,15 @@
   background: var(--bg-primary);
   margin: 0 auto;
   padding: 0 var(--space-xl) 8rem;
-  transform: translateY(40px);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(32px);
+  transition: transform 0.6s var(--ease-out-expo);
 }
 
 .exp-modal.is-open .exp-modal__content {
   transform: translateY(0);
 }
 
+/* ─── Sticky nav ──────────────────────────────────────── */
 .exp-modal__nav {
   position: sticky;
   top: 0;
@@ -43,28 +47,36 @@
   padding: 2rem 0;
   background: var(--bg-primary);
   z-index: 100;
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .exp-modal__close {
   background: none;
-  border: none;
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 700;
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.15em;
-  color: var(--text-primary);
+  color: var(--text-muted);
   cursor: pointer;
   padding: 0.5rem 1rem;
-  transition: color var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-normal),
+    background var(--transition-normal);
 }
 
 .exp-modal__close:hover {
-  color: var(--text-secondary);
+  color: var(--bg-primary);
+  background: var(--text-primary);
+  border-color: var(--text-primary);
 }
 
+/* ─── Header ──────────────────────────────────────────── */
 .exp-modal__header {
-  margin: 3rem 0 4.5rem;
-  max-width: 900px;
+  margin: 3.5rem 0 4.5rem;
+  max-width: 880px;
 }
 
 .exp-modal__meta-row {
@@ -72,42 +84,47 @@
   gap: 1.5rem;
   margin-bottom: 1.5rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   color: var(--text-dim);
   text-transform: uppercase;
 }
 
+.exp-modal__type {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .exp-modal__title {
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
   color: var(--text-primary);
   line-height: 1.1;
   margin-bottom: 1rem;
 }
 
 .exp-modal__org {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
   color: var(--text-secondary);
-  line-height: 1.5;
   font-family: var(--font-mono);
+  letter-spacing: 0.02em;
 }
 
+/* ─── Body ─────────────────────────────────────────────── */
 .exp-modal__body {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 6rem;
 }
 
-.exp-modal__section {
-  margin-bottom: 3.5rem;
-}
+.exp-modal__section { margin-bottom: 3.5rem; }
 
 .exp-modal__section h3 {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
   color: var(--text-dim);
   text-transform: uppercase;
   margin-bottom: 1.5rem;
@@ -116,7 +133,7 @@
 }
 
 .exp-modal__section p {
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1.8;
   color: var(--text-secondary);
 }
@@ -124,17 +141,16 @@
 .exp-modal__list {
   list-style: none;
   padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.9rem;
 }
 
 .exp-modal__list li {
   position: relative;
   padding-left: 1.5rem;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.65;
   color: var(--text-secondary);
 }
 
@@ -142,63 +158,68 @@
   content: '';
   position: absolute;
   left: 0;
-  top: 0.6rem;
-  width: 6px;
-  height: 6px;
-  background: var(--text-dim);
+  top: 0.62rem;
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
   border-radius: 50%;
+  opacity: 0.7;
 }
 
+/* ─── Tech stack ──────────────────────────────────────── */
 .exp-modal__tech-stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.55rem;
 }
 
 .exp-modal__tech-item {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   letter-spacing: 0.05em;
-  padding: 0.4rem 0.8rem;
+  padding: 0.35rem 0.75rem;
   background: var(--bg-secondary);
   border: 1px solid var(--glass-border);
-  color: var(--text-primary);
+  color: var(--text-secondary);
   border-radius: var(--radius-sm);
 }
 
+/* ─── Links ─────────────────────────────────────────── */
 .exp-modal__links {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
 .exp-modal__link-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.9rem 1.4rem;
+  padding: 0.85rem 1.35rem;
   background: var(--text-primary);
   color: var(--bg-primary);
   text-decoration: none;
+  font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   letter-spacing: 0.12em;
   border-radius: var(--radius-sm);
   transition: opacity var(--transition-fast);
   text-transform: uppercase;
 }
 
-.exp-modal__link-btn:hover {
-  opacity: 0.9;
-}
+.exp-modal__link-btn:hover { opacity: 0.88; }
 
+/* ─── Responsive ─────────────────────────────────────── */
 @media (max-width: 900px) {
   .exp-modal__body {
     grid-template-columns: 1fr;
     gap: 0;
   }
 
-  .exp-modal__header {
-    margin: 2rem 0 3rem;
+  .exp-modal__header { margin: 2.5rem 0 3rem; }
+
+  .exp-modal__content {
+    padding: 0 var(--space-md) 6rem;
   }
 }

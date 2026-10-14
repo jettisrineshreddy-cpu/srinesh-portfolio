@@ -19,7 +19,7 @@ export const HeroCenterpiece: React.FC<HeroCenterpieceProps> = ({ reducedMotion 
 
   useFrame((state) => {
     if (reducedMotion) return;
-    const time = state.clock.getElapsedTime();
+    const time = state.clock.elapsedTime;
     const pointer = state.pointer;
 
     // Outer cage slow rotation with pointer parallax

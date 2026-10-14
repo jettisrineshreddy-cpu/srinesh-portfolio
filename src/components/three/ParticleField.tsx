@@ -46,7 +46,7 @@ export const ParticleField: React.FC<ParticleFieldProps> = ({
   useFrame((state) => {
     if (!meshRef.current) return;
 
-    const time = state.clock.getElapsedTime();
+    const time = state.clock.elapsedTime;
     const speed = reducedMotion ? 0.05 : 1.0;
 
     for (let i = 0; i < count; i++) {

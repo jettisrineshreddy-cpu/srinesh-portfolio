@@ -11,14 +11,14 @@ export function useGsapAnimations() {
   useEffect(() => {
     if (prefersReduced) return;
 
-    // ─── HERO (delayed to wait for loader) ───────────────────────────
-    const heroTl = gsap.timeline({ delay: 1.5 });
+    // ─── HERO (immediate entrance, graceful and snappy) ───────────────
+    const heroTl = gsap.timeline({ delay: 0.4 });
     heroTl
-      .fromTo('.hero__status',    { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
-      .fromTo('.hero__title-line',{ opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power4.out' }, '-=0.4')
-      .fromTo('.hero__subtitle',  { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
-      .fromTo('.hero__statement', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.5')
-      .fromTo('.hero__actions',   { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4');
+      .fromTo('.hero__status',    { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' })
+      .fromTo('.hero__title-line',{ opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power4.out' }, '-=0.3')
+      .fromTo('.hero__subtitle',  { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+      .fromTo('.hero__statement', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, '-=0.4')
+      .fromTo('.hero__actions',   { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3');
 
     // ─── SECTION HEADERS ─────────────────────────────────────────────────
     gsap.utils.toArray('.section-header').forEach((header: any) => {
@@ -42,15 +42,44 @@ export function useGsapAnimations() {
       }
     );
 
-    // ─── CERTIFICATIONS ───────────────────────────────────────────────────
-    gsap.fromTo('.cert-item',
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
-        stagger: 0.1,
-        scrollTrigger: { trigger: '#certifications', start: 'top 80%' },
-      }
-    );
+    // ─── CERTIFICATIONS — stagger per-list item ────────────────────────
+    // Experience items
+    const expItems = document.querySelectorAll('.experience__list .cert-item');
+    if (expItems.length > 0) {
+      gsap.fromTo(expItems,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+          stagger: 0.1,
+          scrollTrigger: { trigger: '#certifications', start: 'top 80%' },
+        }
+      );
+    }
+
+    // Credential cert items — staggered when their section comes into view
+    const credItems = document.querySelectorAll('.certs__list:not(.experience__list) .cert-item');
+    if (credItems.length > 0) {
+      gsap.fromTo(credItems,
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1, y: 0, duration: 0.5, ease: 'power3.out',
+          stagger: 0.07,
+          scrollTrigger: { trigger: '#credentials', start: 'top 82%' },
+        }
+      );
+    }
+
+    // Education block
+    const eduBlock = document.querySelector('.edu__block');
+    if (eduBlock) {
+      gsap.fromTo(eduBlock,
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1, y: 0, duration: 0.5, ease: 'power3.out',
+          scrollTrigger: { trigger: '#education', start: 'top 85%' },
+        }
+      );
+    }
 
     // ─── CONTACT ──────────────────────────────────────────────────────────
     gsap.fromTo('.contact__headline',

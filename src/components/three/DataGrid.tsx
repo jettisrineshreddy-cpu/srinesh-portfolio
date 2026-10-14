@@ -37,7 +37,7 @@ export const DataGrid: React.FC<DataGridProps> = ({ reducedMotion = false }) => 
 
   useFrame((state) => {
     if (!gridRef.current || reducedMotion) return;
-    gridRef.current.rotation.y = state.clock.getElapsedTime() * 0.015;
+    gridRef.current.rotation.y = state.clock.elapsedTime * 0.015;
   });
 
   return (

@@ -53,7 +53,7 @@ export const FloatingNodes: React.FC<FloatingNodesProps> = ({
 
   useFrame((state) => {
     if (!groupRef.current) return;
-    const time = state.clock.getElapsedTime();
+    const time = state.clock.elapsedTime;
 
     // Animate node positions (bob gently)
     groupRef.current.children.forEach((child, i) => {
