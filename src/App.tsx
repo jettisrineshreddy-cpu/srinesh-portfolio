@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/layout/Navbar';
+import { Background } from './components/layout/Background';
 import { Scene } from './components/three/Scene';
 import { Hero } from './components/sections/Hero';
 import { About } from './components/sections/About';
@@ -25,6 +26,7 @@ export const App: React.FC = () => {
       
       <CustomCursor />
       <SkipLink />
+      <Background />
       <Scene />
       <Navbar />
 

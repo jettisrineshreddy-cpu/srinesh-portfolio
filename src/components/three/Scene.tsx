@@ -10,10 +10,11 @@ import { HeroCenterpiece } from './HeroCenterpiece';
 import { ScrollRig } from './ScrollRig';
 
 /**
- * The main 3D scene container.
  * - Detects WebGL availability → falls back to a polished static gradient if unavailable.
  * - Respects prefers-reduced-motion → dramatically slows/disables animation.
  * - Adapts particle count and DPR to device capabilities.
+ * - Adds subtle ambient and colored point lights for cinematic depth.
+ * - Applies fog for atmospheric depth and a background overlay via CSS.
  */
 export const Scene: React.FC = () => {
   const hasWebGL = isWebGLAvailable();
@@ -42,9 +43,15 @@ export const Scene: React.FC = () => {
       >
         <Suspense fallback={null}>
           <ScrollRig reducedMotion={prefersReduced} />
-          
+
           {/* Ambient atmospheric light */}
-          <ambientLight intensity={0.3} />
+          <ambientLight intensity={0.25} />
+          {/* Subtle colored point lights for cinematic glow */}
+          <pointLight position={[-12, 6, 12]} intensity={0.2} color={0x496bff} distance={30} />
+          <pointLight position={[12, 6, -12]} intensity={0.15} color={0x8b5cf6} distance={30} />
+
+          {/* Fog for depth */}
+          <fog attach="fog" args={['#07080D', 30, 100]} />
 
           {/* Particle field: the primary visual element */}
           <ParticleField
@@ -59,13 +66,8 @@ export const Scene: React.FC = () => {
           {/* Floating geometric nodes (skip on low-end mobile to save perf) */}
           {!isMobile && (
             <>
-              <FloatingNodes
-                count={18}
-                reducedMotion={prefersReduced}
-              />
-              <HeroCenterpiece
-                reducedMotion={prefersReduced}
-              />
+              <FloatingNodes count={18} reducedMotion={prefersReduced} />
+              <HeroCenterpiece reducedMotion={prefersReduced} />
             </>
           )}
         </Suspense>

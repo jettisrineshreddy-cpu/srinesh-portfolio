@@ -5,12 +5,12 @@
 
 :root {
   /* ─── Color: Near-black foundations ─────────────────────── */
-  --bg-primary:    #080808;
-  --bg-secondary:  #0d0d0d;
-  --bg-tertiary:   #141414;
-  --bg-card:       rgba(16, 16, 16, 0.5);
-  --bg-card-hover: rgba(22, 22, 22, 0.9);
-  --bg-card-featured: rgba(18, 18, 18, 0.65);
+  --bg-primary:    #07080D;
+  --bg-secondary:  #0B1020;
+  --bg-tertiary:   #12162A;
+  --bg-card:       rgba(11, 16, 32, 0.45);
+  --bg-card-hover: rgba(18, 22, 42, 0.85);
+  --bg-card-featured: rgba(14, 19, 36, 0.6);
 
   /* ─── Borders / surfaces ────────────────────────────────── */
   --glass-bg:             rgba(10, 10, 10, 0.75);
