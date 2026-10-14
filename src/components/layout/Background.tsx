@@ -8,6 +8,7 @@ export const Background: React.FC = () => {
       <div className="background__glow--blue" />
       <div className="background__glow--violet" />
       <div className="background__glow--cyan" />
+      <div className="background__texture" />
     </div>
   );
 };
