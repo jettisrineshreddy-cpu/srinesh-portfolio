@@ -10,11 +10,7 @@ const NAV_LINKS = [
   { href: '#contact', label: 'CONTACT' },
 ];
 
-interface NavbarProps {
-  onToggle3DMode?: () => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ onToggle3DMode = () => {} }) => {
+export const Navbar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -84,16 +80,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggle3DMode = () => {} }) => 
           </nav>
 
           <div className="navbar__right">
-            <button
-              type="button"
-              className="navbar__3d-toggle"
-              onClick={onToggle3DMode}
-              aria-label="Enter Interactive 3D Room Experience"
-            >
-              <span className="navbar__3d-indicator" />
-              <span>3D LAB</span>
-            </button>
-
             <a
               href={profileData.links.resume}
               className="navbar__cta"

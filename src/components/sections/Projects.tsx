@@ -141,6 +141,7 @@ export const Projects: React.FC = () => {
                     <span className="project-showcase__year">2025</span>
                   </div>
                   <h3 className="project-showcase__title">{project.title}</h3>
+                  <p className="project-showcase__summary">{project.summary}</p>
                 </div>
 
                 {/* Visual: Massive image area */}

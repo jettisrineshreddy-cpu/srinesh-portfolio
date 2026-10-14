@@ -37,17 +37,3 @@
   border-color: var(--text-primary);
   background: rgba(255, 255, 255, 0.04);
 }
-
-.btn--3d {
-  background: linear-gradient(135deg, rgba(2, 132, 199, 0.3), rgba(37, 99, 235, 0.4));
-  color: #38bdf8;
-  border: 1px solid #38bdf8;
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
-}
-
-.btn--3d:hover {
-  background: #0284c7;
-  color: #ffffff;
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
-  transform: translateY(-1px);
-}

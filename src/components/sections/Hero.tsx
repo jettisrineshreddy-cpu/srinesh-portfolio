@@ -3,11 +3,7 @@ import { Button } from '../ui/Button';
 import { profileData } from '../../data/profile';
 import './Hero.css';
 
-interface HeroProps {
-  onEnter3DMode?: () => void;
-}
-
-export const Hero: React.FC<HeroProps> = ({ onEnter3DMode }) => {
+export const Hero: React.FC = () => {
   return (
     <section id="hero" className="hero">
       <div className="hero__container">
@@ -28,16 +24,6 @@ export const Hero: React.FC<HeroProps> = ({ onEnter3DMode }) => {
         </p>
 
         <div className="hero__actions">
-          {onEnter3DMode && (
-            <button
-              type="button"
-              className="btn btn--3d"
-              onClick={onEnter3DMode}
-              aria-label="Launch 3D Workstation World"
-            >
-              LAUNCH 3D LAB &#9654;
-            </button>
-          )}
           <Button variant="primary" href="#projects">
             VIEW WORK
           </Button>

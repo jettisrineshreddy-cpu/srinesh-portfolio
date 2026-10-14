@@ -81,6 +81,14 @@
   transform: translateX(12px);
 }
 
+.project-showcase__summary {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 820px;
+  margin-top: 1rem;
+}
+
 /* Visuals */
 .project-showcase__visual-wrapper {
   width: 100%;
