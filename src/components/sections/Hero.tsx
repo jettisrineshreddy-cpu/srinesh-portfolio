@@ -25,7 +25,7 @@ export const Hero: React.FC = () => {
 
         <div className="hero__actions">
           <Button variant="primary" href="#projects">
-            EXPLORE MY WORK &darr;
+            VIEW MY PROJECTS &darr;
           </Button>
           <Button
             variant="outline"
@@ -36,7 +36,7 @@ export const Hero: React.FC = () => {
             DOWNLOAD RESUME &rarr;
           </Button>
           <Button variant="outline" href="#contact">
-            CONTACT &rarr;
+            GET IN TOUCH &rarr;
           </Button>
         </div>
         

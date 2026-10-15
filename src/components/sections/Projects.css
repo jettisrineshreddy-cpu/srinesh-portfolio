@@ -110,6 +110,24 @@
   line-height: 1.7;
 }
 
+.project-showcase__kpis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.project-showcase__kpi-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  background: rgba(181, 18, 43, 0.08);
+  border: 1px solid rgba(181, 18, 43, 0.22);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.6rem;
+}
+
 /* Visual wrapper */
 .project-showcase__visual-wrapper {
   position: relative;

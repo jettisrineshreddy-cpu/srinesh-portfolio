@@ -142,6 +142,15 @@ export const Projects: React.FC = () => {
                   </div>
                   <h3 className="project-showcase__title">{project.title}</h3>
                   <p className="project-showcase__summary">{project.summary}</p>
+                  {project.knownKPIs && project.knownKPIs.length > 0 && (
+                    <div className="project-showcase__kpis">
+                      {project.knownKPIs.slice(0, 3).map((kpi) => (
+                        <span key={kpi} className="project-showcase__kpi-badge">
+                          {kpi}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Visual: Massive image area */}
