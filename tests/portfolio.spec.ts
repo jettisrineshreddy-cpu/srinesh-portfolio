@@ -1,16 +1,16 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('J. Srinesh Portfolio — End-to-End Suite', () => {
+test.describe('Jetti Srinesh Reddy Portfolio — End-to-End Suite', () => {
   test('homepage loads successfully with correct title, metadata and identity', async ({ page }) => {
     await page.goto('/');
 
     // Check title contains identity
-    await expect(page).toHaveTitle(/J\. Srinesh/i);
+    await expect(page).toHaveTitle(/Jetti Srinesh Reddy/i);
     await expect(page.locator('body')).toBeVisible();
 
     // Check core branding & positioning
     const heroTitle = page.locator('.hero__title');
-    await expect(heroTitle).toContainText('J. SRINESH');
+    await expect(heroTitle).toContainText('JETTI SRINESH REDDY');
     await expect(heroTitle).toContainText('AI × DATA × ENGINEERING');
   });
 
