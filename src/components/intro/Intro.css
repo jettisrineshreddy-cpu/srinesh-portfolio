@@ -76,7 +76,7 @@
   gap: 0;
 }
 
-/* Initials - JS */
+/* Initials - JSR */
 .intro__initials {
   font-family: var(--font-display);
   font-size: clamp(5rem, 18vw, 14rem);

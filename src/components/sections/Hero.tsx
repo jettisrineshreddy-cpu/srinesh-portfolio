@@ -14,7 +14,7 @@ export const Hero: React.FC = () => {
         </div>
 
         <h1 className="hero__title">
-          <span className="hero__title-line">J. SRINESH</span>
+          <span className="hero__title-line">JETTI SRINESH REDDY</span>
           <span className="hero__subtitle">AI &times; DATA &times; ENGINEERING</span>
         </h1>
         

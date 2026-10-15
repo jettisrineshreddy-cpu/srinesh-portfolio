@@ -45,7 +45,7 @@ export const Contact: React.FC = () => {
           <div className="footer__rule" />
           <div className="footer__row">
             <a href="#hero" className="footer__brand" aria-label="Back to top">
-              <span className="footer__name">J. SRINESH</span>
+              <span className="footer__name">JETTI SRINESH REDDY</span>
               <span className="footer__tagline">AI &times; DATA &times; ENGINEERING</span>
             </a>
             <nav className="footer__links" aria-label="Footer links">

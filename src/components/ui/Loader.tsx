@@ -65,7 +65,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     <div className="loader" ref={loaderRef}>
       <div className="loader__content">
         <div className="loader__text-mask">
-          <span className="loader__text" ref={text1Ref}>J. SRINESH</span>
+          <span className="loader__text" ref={text1Ref}>JETTI SRINESH REDDY</span>
         </div>
         <div className="loader__text-mask">
           <span className="loader__text loader__text--small" ref={text2Ref}>AI / DATA / ENGINEERING</span>

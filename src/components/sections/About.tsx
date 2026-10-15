@@ -107,7 +107,7 @@ export const About: React.FC = () => {
         {/* TOP ROW: Label + Statement */}
         <div className="about__top-grid">
           <div className="about__top-left">
-            <span className="about__label">ABOUT &mdash; J. SRINESH</span>
+            <span className="about__label">ABOUT &mdash; JETTI SRINESH REDDY</span>
             <h2 className="about__statement">
               <div className="about__statement-mask">
                 <span className="about__statement-line">Building intelligent systems</span>
@@ -124,13 +124,13 @@ export const About: React.FC = () => {
               <img
                 ref={photoImgRef}
                 src="/profile.png"
-                alt="J. Srinesh"
+                alt="Jetti Srinesh Reddy"
                 className="about__photo-img"
                 loading="eager"
                 decoding="async"
               />
               <div className="about__photo-tag">
-                <span className="about__photo-tag-name">J. SRINESH</span>
+                <span className="about__photo-tag-name">JETTI SRINESH REDDY</span>
                 <span className="about__photo-tag-role">AI · DATA · ENGINEERING</span>
               </div>
             </div>

@@ -61,7 +61,7 @@ export const Navbar: React.FC = () => {
     <>
       <header className={`navbar${scrolled ? ' navbar--scrolled' : ''}`}>
         <div className="navbar__inner">
-          <a href="#hero" className="navbar__brand" onClick={close} aria-label="J. Srinesh — Home">
+          <a href="#hero" className="navbar__brand" onClick={close} aria-label="Jetti Srinesh Reddy — Home">
             SRINESH
           </a>
 

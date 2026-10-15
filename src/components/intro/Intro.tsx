@@ -126,9 +126,9 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
       </div>
 
       <div className="intro__content">
-        <div className="intro__initials" style={{ scale: 0.95 }}>JS</div>
+        <div className="intro__initials" style={{ scale: 0.95 }}>JSR</div>
         <div className="intro__name">
-          <span className="intro__name-inner">J. SRINESH</span>
+          <span className="intro__name-inner">JETTI SRINESH REDDY</span>
         </div>
         <div className="intro__statement">AI &times; DATA &times; ENGINEERING</div>
       </div>

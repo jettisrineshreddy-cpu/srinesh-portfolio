@@ -30,7 +30,7 @@ export interface Profile {
 }
 
 export const profileData: Profile = {
-  name: "J. Srinesh",
+  name: "Jetti Srinesh Reddy",
   degree: "Bachelor of Technology (B.Tech) — Artificial Intelligence",
   university: "Amrita Vishwa Vidyapeetham",
   campus: "Amaravati Campus",
