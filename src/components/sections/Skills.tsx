@@ -29,6 +29,8 @@ const SKILL_GROUPS = [
 ];
 
 export const Skills: React.FC = () => {
+  const [activeGroup, setActiveGroup] = React.useState<string | null>(null);
+
   return (
     <section id="skills" className="skills section-padding">
       <div className="content-wrapper">
@@ -38,18 +40,28 @@ export const Skills: React.FC = () => {
         </div>
 
         <div className="skills__grid">
-          {SKILL_GROUPS.map((group) => (
-            <div key={group.num} className="skill-col">
-              <div className="skill-col__num">{group.num}</div>
-              <div className="skill-col__category">{group.category}</div>
-              <p className="skill-col__desc">{group.desc}</p>
-              <ul className="skill-col__items">
-                {group.skills.map((skill) => (
-                  <li key={skill} className="skill-col__item">{skill}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {SKILL_GROUPS.map((group) => {
+            const isDimmed = activeGroup !== null && activeGroup !== group.num;
+            return (
+              <div
+                key={group.num}
+                className={`skill-col ${isDimmed ? 'skill-col--dimmed' : ''}`}
+                onMouseEnter={() => setActiveGroup(group.num)}
+                onMouseLeave={() => setActiveGroup(null)}
+              >
+                <div className="skill-col__header">
+                  <span className="skill-col__num">{group.num}</span>
+                  <div className="skill-col__category">{group.category}</div>
+                </div>
+                <p className="skill-col__desc">{group.desc}</p>
+                <ul className="skill-col__items">
+                  {group.skills.map((skill) => (
+                    <li key={skill} className="skill-col__item">{skill}</li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -13,15 +13,24 @@
 }
 
 .skill-col {
-  padding: 2rem 2rem 2.5rem;
+  padding: 2.2rem 2rem 2.75rem;
   border-left: 1px solid var(--glass-border);
-  transition: border-color var(--transition-normal), background var(--transition-normal);
+  transition: border-color var(--transition-normal),
+              background var(--transition-normal),
+              opacity var(--transition-normal),
+              transform var(--transition-normal);
   opacity: 0;
+  position: relative;
 }
 
 .skill-col:hover {
-  border-color: rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.015);
+  border-color: rgba(227, 38, 54, 0.45);
+  background: rgba(181, 18, 43, 0.04);
+  transform: translateY(-4px);
+}
+
+.skill-col--dimmed {
+  opacity: 0.35 !important;
 }
 
 .skill-col__num {
