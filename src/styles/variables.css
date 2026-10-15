@@ -4,32 +4,33 @@
 ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ─── Color: Near-black foundations ─────────────────────── */
-  --bg-primary:    #07080D;
-  --bg-secondary:  #0B1020;
-  --bg-tertiary:   #12162A;
-  --bg-card:       rgba(11, 16, 32, 0.45);
-  --bg-card-hover: rgba(18, 22, 42, 0.85);
-  --bg-card-featured: rgba(14, 19, 36, 0.6);
+  /* ─── Color: Luxury Crimson & Obsidian foundations ─────── */
+  --bg-primary:    #090708;   /* obsidian black */
+  --bg-secondary:  #160509;   /* deep obsidian burgundy */
+  --bg-tertiary:   #23080F;   /* midnight burgundy */
+  --bg-card:       rgba(28, 8, 14, 0.45);
+  --bg-card-hover: rgba(45, 10, 20, 0.75);
+  --bg-card-featured: rgba(35, 9, 17, 0.6);
 
   /* ─── Borders / surfaces ────────────────────────────────── */
-  --glass-bg:             rgba(10, 10, 10, 0.75);
+  --glass-bg:             rgba(16, 6, 9, 0.75);
   --glass-border:         rgba(255, 255, 255, 0.07);
-  --glass-border-hover:   rgba(255, 255, 255, 0.18);
+  --glass-border-hover:   rgba(227, 38, 54, 0.25);
   --glass-border-strong:  rgba(255, 255, 255, 0.12);
   --glass-blur:           blur(24px);
 
-  /* ─── Single accent: warm blue-grey tint ───────────────── */
-  /* Used sparingly for the one "alive" element at a time     */
-  --accent:          #b8c9d5;   /* warm, desaturated, not neon  */
-  --accent-subtle:   rgba(184, 201, 213, 0.12);
-  --accent-border:   rgba(184, 201, 213, 0.25);
+  /* ─── Single accent: Restrained scarlet & rich ruby ─────── */
+  --accent:          #e32636;   /* restrained scarlet highlight */
+  --accent-ruby:     #b5122b;   /* rich ruby red */
+  --accent-crimson:  #800f24;   /* deep blood red */
+  --accent-subtle:   rgba(227, 38, 54, 0.12);
+  --accent-border:   rgba(227, 38, 54, 0.3);
 
   /* ─── Typography colors ─────────────────────────────────── */
-  --text-primary:   #f2f0ec;   /* warm white — not pure white */
-  --text-secondary: #9d9d97;
-  --text-muted:     #6b6b65;
-  --text-dim:       #484844;
+  --text-primary:   #f6f3f2;   /* warm ivory off-white */
+  --text-secondary: #a89d9e;   /* subtle muted warm gray */
+  --text-muted:     #786b6d;   /* deeper muted slate */
+  --text-dim:       #524547;
 
   /* ─── Fonts ──────────────────────────────────────────────── */
   /* Display: Space Grotesk for oversized headings             */

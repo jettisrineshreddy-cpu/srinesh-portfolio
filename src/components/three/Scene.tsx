@@ -45,13 +45,13 @@ export const Scene: React.FC = () => {
           <ScrollRig reducedMotion={prefersReduced} />
 
           {/* Ambient atmospheric light */}
-          <ambientLight intensity={0.25} />
-          {/* Subtle colored point lights for cinematic glow */}
-          <pointLight position={[-12, 6, 12]} intensity={0.2} color={0x496bff} distance={30} />
-          <pointLight position={[12, 6, -12]} intensity={0.15} color={0x8b5cf6} distance={30} />
+          <ambientLight intensity={0.22} />
+          {/* Subtle colored point lights for cinematic crimson depth */}
+          <pointLight position={[-12, 6, 12]} intensity={0.25} color={0x800f24} distance={30} />
+          <pointLight position={[12, 6, -12]} intensity={0.18} color={0xb5122b} distance={30} />
 
-          {/* Fog for depth */}
-          <fog attach="fog" args={['#07080D', 30, 100]} />
+          {/* Fog for cinematic depth into obsidian black */}
+          <fog attach="fog" args={['#090708', 30, 100]} />
 
           {/* Particle field: the primary visual element */}
           <ParticleField

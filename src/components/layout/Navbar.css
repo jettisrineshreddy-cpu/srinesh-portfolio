@@ -12,10 +12,10 @@
 }
 
 .navbar--scrolled {
-  background: rgba(8, 8, 8, 0.9);
+  background: rgba(14, 6, 8, 0.92);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--glass-border);
+  border-bottom: 1px solid rgba(227, 38, 54, 0.1);
 }
 
 /* Scroll progress indicator — a fine accent line */
@@ -27,7 +27,7 @@
   background: linear-gradient(90deg,
     transparent,
     var(--accent) 40%,
-    rgba(184, 201, 213, 0.5) 100%
+    rgba(227, 38, 54, 0.6) 100%
   );
   transition: width 80ms linear;
   pointer-events: none;

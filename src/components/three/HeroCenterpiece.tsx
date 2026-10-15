@@ -75,10 +75,10 @@ export const HeroCenterpiece: React.FC<HeroCenterpieceProps> = ({ reducedMotion 
           <mesh>
             <octahedronGeometry args={[1.9, 0]} />
             <meshBasicMaterial
-              color="#c2d1d9"
+              color="#dca5ab"
               wireframe
               transparent
-              opacity={0.12}
+              opacity={0.15}
               depthWrite={false}
             />
           </mesh>
