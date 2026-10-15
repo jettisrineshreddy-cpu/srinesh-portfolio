@@ -1,120 +1,109 @@
 /* ═══════════════════════════════════════════════════════════
-   CONTACT — Memorable closing section
-   Oversized headline. Elegant link list. Clean footer.
+   CONTACT — End-of-page CTA + Footer
 ═══════════════════════════════════════════════════════════ */
 
 .contact {
-  padding-top: 10rem;
+  padding-top: var(--section-gap);
   position: relative;
-  z-index: 10;
 }
 
 .contact__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding-bottom: 8rem;
 }
 
-/* Section label */
 .contact__label {
-  display: block;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  color: var(--text-dim);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin-bottom: 3rem;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
 }
 
-/* GSAP initial state */
-.contact__headline { opacity: 0; }
-
-@media (prefers-reduced-motion: reduce) {
-  .contact__headline { opacity: 1; }
-}
-
-/* Oversized display headline — the emotional anchor */
 .contact__headline {
   font-family: var(--font-display);
-  font-size: clamp(3.5rem, 9.5vw, 9rem);
-  font-weight: 700;
-  letter-spacing: -0.05em;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
   color: var(--text-primary);
-  line-height: 0.95;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+}
+
+.contact__desc {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  line-height: 1.7;
   margin-bottom: 3rem;
 }
 
-.contact__br { display: block; }
-@media (max-width: 600px) { .contact__br { display: none; } }
-
-.contact__desc {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.75;
-  margin-bottom: 4.5rem;
-  max-width: 440px;
+.contact__br {
+  display: block;
 }
 
-/* ─── Link rows ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .contact__br { display: none; }
+}
+
+/* ─── Links row ─────────────────────────────────────────── */
 .contact__links {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 4rem;
-  border-top: 1px solid var(--glass-border);
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
 }
 
 .contact__link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 0;
+  gap: 0.4rem;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 600;
   letter-spacing: 0.15em;
-  color: var(--text-muted);
-  text-decoration: none;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--glass-border);
-  transition:
-    color var(--transition-fast),
-    padding-left var(--transition-normal),
-    background var(--transition-normal);
-  position: relative;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .contact__link:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.018);
-  padding-left: 1rem;
-}
-
-.contact__link-label { /* text label */ }
-
-.contact__link-arrow {
-  font-size: 1rem;
-  color: var(--text-dim);
-  transition: transform var(--transition-normal), color var(--transition-fast);
 }
 
 .contact__link:hover .contact__link-arrow {
-  transform: translateX(8px);
-  color: var(--text-primary);
+  transform: translateX(4px);
 }
 
-/* Email display — subtle mono type */
+.contact__link-arrow {
+  transition: transform var(--transition-normal);
+  display: inline-block;
+}
+
+/* Email display */
 .contact__email-display {
   font-family: var(--font-mono);
-  font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
   color: var(--text-dim);
-  letter-spacing: 0.04em;
 }
 
-/* ─── FOOTER ────────────────────────────────────────────── */
+/* ─── Footer ────────────────────────────────────────────── */
 .footer {
-  border-top: 1px solid var(--glass-border);
-  padding: 2.75rem 0;
+  padding: 3rem 0;
 }
 
-.footer__rule { display: none; }
+.footer__rule {
+  height: 1px;
+  background: var(--glass-border);
+  margin-bottom: 2rem;
+}
 
 .footer__row {
   display: flex;
@@ -127,7 +116,7 @@
 .footer__brand {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.25rem;
   text-decoration: none;
 }
 
@@ -135,81 +124,86 @@
   font-family: var(--font-display);
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   color: var(--text-primary);
-  text-transform: uppercase;
-  transition: opacity var(--transition-fast);
 }
-
-.footer__brand:hover .footer__name { opacity: 0.55; }
 
 .footer__tagline {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
   color: var(--text-dim);
-  text-transform: uppercase;
 }
 
 .footer__links {
   display: flex;
-  gap: 2.25rem;
+  gap: 2rem;
 }
 
 .footer__link {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   color: var(--text-muted);
   text-decoration: none;
-  text-transform: uppercase;
   transition: color var(--transition-fast);
 }
-.footer__link:hover { color: var(--text-primary); }
+
+.footer__link:hover {
+  color: var(--text-primary);
+}
 
 .footer__right {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .footer__year {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
   color: var(--text-dim);
 }
 
 .footer__top {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
   color: var(--text-muted);
   text-decoration: none;
-  transition:
-    color var(--transition-fast),
-    transform var(--transition-normal);
-  text-transform: uppercase;
-  display: inline-block;
-}
-.footer__top:hover {
-  color: var(--text-primary);
-  transform: translateY(-3px);
+  transition: color var(--transition-fast);
 }
 
-/* ─── Responsive ────────────────────────────────────────── */
+.footer__top:hover {
+  color: var(--text-primary);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .contact__headline {
+    opacity: 1;
+  }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .contact { padding-top: 6rem; }
+  .contact__inner {
+    padding-bottom: 5rem;
+  }
+
+  .contact__links {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
 
   .footer__row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
-  .footer__links { gap: 1.5rem; }
-  .footer__tagline { display: none; }
-}
-
-@media (max-width: 480px) {
-  .contact__link { padding-left: 0 !important; }
+  .footer__links {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }

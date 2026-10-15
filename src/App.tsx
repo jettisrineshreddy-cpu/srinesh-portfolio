@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Navbar } from './components/layout/Navbar';
 import { Background } from './components/layout/Background';
 import { Scene } from './components/three/Scene';
@@ -10,19 +10,34 @@ import { Certifications } from './components/sections/Certifications';
 import { ResearchCloud } from './components/sections/ResearchCloud';
 import { Contact } from './components/sections/Contact';
 import { SkipLink } from './components/ui/SkipLink';
-import { Loader } from './components/ui/Loader';
+import { Intro } from './components/intro/Intro';
 import { CustomCursor } from './components/ui/CustomCursor';
 import { useGsapAnimations } from './hooks/useGsapAnimations';
 import './App.css';
 
 export const App: React.FC = () => {
-  const [loading, setLoading] = useState(true);
+  const [introComplete, setIntroComplete] = useState(
+    () => sessionStorage.getItem('introSeen') === 'true'
+  );
+  const [showReplay, setShowReplay] = useState(false);
 
   useGsapAnimations();
 
+  const handleIntroComplete = useCallback(() => {
+    setIntroComplete(true);
+    // Show replay button after a short delay
+    setTimeout(() => setShowReplay(true), 1000);
+  }, []);
+
+  const handleReplay = useCallback(() => {
+    sessionStorage.removeItem('introSeen');
+    setIntroComplete(false);
+    setShowReplay(false);
+  }, []);
+
   return (
     <div className="portfolio-app">
-      {loading && <Loader onComplete={() => setLoading(false)} />}
+      {!introComplete && <Intro onComplete={handleIntroComplete} />}
       
       <CustomCursor />
       <SkipLink />
@@ -39,6 +54,17 @@ export const App: React.FC = () => {
         <ResearchCloud />
         <Contact />
       </main>
+
+      {showReplay && (
+        <button
+          className="replay-btn"
+          onClick={handleReplay}
+          aria-label="Replay intro animation"
+          title="Replay Intro"
+        >
+          ↻
+        </button>
+      )}
     </div>
   );
 };

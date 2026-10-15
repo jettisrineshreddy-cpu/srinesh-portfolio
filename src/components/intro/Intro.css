@@ -1,0 +1,216 @@
+/* Full-screen overlay */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: #050505;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Atmospheric background layers */
+.intro__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Deep crimson ambient glow - appears in Stage 1 */
+.intro__glow {
+  position: absolute;
+  width: 80vw;
+  height: 80vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(181, 18, 43, 0.12) 0%,
+    rgba(128, 15, 36, 0.06) 30%,
+    rgba(74, 7, 20, 0.03) 55%,
+    transparent 70%
+  );
+  filter: blur(80px);
+  opacity: 0;
+}
+
+/* Subtle film grain texture */
+.intro__grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* Light sweep line - a horizontal gradient that moves across */
+.intro__sweep {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(181, 18, 43, 0.04) 30%,
+    rgba(227, 38, 54, 0.08) 50%,
+    rgba(181, 18, 43, 0.04) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Content layers - centered */
+.intro__content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0;
+}
+
+/* Initials - JS */
+.intro__initials {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 18vw, 14rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  line-height: 1;
+  opacity: 0;
+  position: relative;
+}
+
+/* Metallic shimmer pseudo-element on initials */
+.intro__initials::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(181, 18, 43, 0.25) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Full name */
+.intro__name {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 7rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  line-height: 0.95;
+  text-transform: uppercase;
+  overflow: hidden;
+  margin-top: -0.5rem;
+}
+
+.intro__name-inner {
+  display: block;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+/* Statement text */
+.intro__statement {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.85rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 2rem;
+  opacity: 0;
+}
+
+/* Progress bar at bottom */
+.intro__progress {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.intro__progress-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  opacity: 0;
+}
+
+.intro__progress-line {
+  width: 60px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.intro__progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+}
+
+/* Skip button */
+.intro__skip {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  z-index: 20;
+  transition: color 0.3s, border-color 0.3s;
+  border-radius: var(--radius-sm);
+}
+
+.intro__skip:hover {
+  color: var(--text-secondary);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro__skip {
+    top: 1rem;
+    right: 1rem;
+  }
+  .intro__progress {
+    bottom: 2rem;
+  }
+}
