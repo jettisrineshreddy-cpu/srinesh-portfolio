@@ -25,10 +25,7 @@ export const Hero: React.FC = () => {
 
         <div className="hero__actions">
           <Button variant="primary" href="#projects">
-            VIEW WORK
-          </Button>
-          <Button variant="outline" href="#contact">
-            CONTACT &rarr;
+            EXPLORE MY WORK &darr;
           </Button>
           <Button
             variant="outline"
@@ -36,7 +33,10 @@ export const Hero: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            RESUME &rarr;
+            DOWNLOAD RESUME &rarr;
+          </Button>
+          <Button variant="outline" href="#contact">
+            CONTACT &rarr;
           </Button>
         </div>
         
