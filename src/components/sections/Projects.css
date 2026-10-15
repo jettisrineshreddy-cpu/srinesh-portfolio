@@ -171,6 +171,21 @@
   background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
 }
 
+.project-showcase__robot-schematic {
+  width: 100%;
+  height: 100%;
+  background: #090708;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.robot-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .abstract-text {
   font-family: var(--font-mono);
   font-size: 0.85rem;

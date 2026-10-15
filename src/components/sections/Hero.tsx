@@ -19,8 +19,7 @@ export const Hero: React.FC = () => {
         </h1>
         
         <p className="hero__statement">
-          Building data-driven systems, analytics solutions,<br className="hero__br" />
-          and intelligent applications from first principles.
+          Building intelligent systems from data, models, and ideas.
         </p>
 
         <div className="hero__actions">
