@@ -103,6 +103,30 @@ ORDER BY occupancy_rate_pct DESC;`,
       ],
       insight: 'ICU occupancy remains above 90%, triggering alerts for elective procedure scheduling reallocations.'
     }
+  ],
+  'hr-analytics': [
+    {
+      id: 'attrition-factors',
+      name: 'Departmental Attrition Rate & Overtime Impact',
+      description: 'Calculates attrition rates and correlates overtime frequency with voluntary separation percentages.',
+      sql: `-- HR Attrition & Overtime Driver Analysis
+SELECT 
+    department,
+    COUNT(employee_id) AS total_employees,
+    SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) AS attrition_count,
+    ROUND(SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) * 100.0 / COUNT(employee_id), 1) AS attrition_rate_pct,
+    ROUND(AVG(CASE WHEN overtime = 'Yes' THEN 1.0 ELSE 0.0 END) * 100, 1) AS overtime_pct
+FROM hr_workforce_records
+GROUP BY department
+ORDER BY attrition_rate_pct DESC;`,
+      columns: ['Department', 'Employees', 'Attrition Count', 'Attrition Rate', 'Overtime %'],
+      rows: [
+        ['Sales & Business Dev', 446, 92, '20.6%', '34.2%'],
+        ['Human Resources', 63, 12, '19.0%', '28.5%'],
+        ['Research & Development', 961, 133, '13.8%', '26.1%'],
+      ],
+      insight: 'Sales teams experiencing overtime exceed 20% attrition, identifying workload rebalancing as the primary retention lever.'
+    }
   ]
 };
 

@@ -130,6 +130,12 @@ export const projectsData: Project[] = [
       "Attrition / Retention Indicators",
       "Employee Performance Indicators",
     ],
+    knownKPIs: [
+      "Attrition Rate (16.1%)",
+      "Avg Monthly Income",
+      "Overtime Correlation",
+      "Job Satisfaction Index",
+    ],
     images: ["/projects/attrition.png"],
     links: {
       github: "[ADD PROJECT LINKS]",
