@@ -106,10 +106,10 @@
          drop-shadow(0 0 120px rgba(120, 5, 20, 0.35));
 }
 
-/* JSR sizing */
+/* JSR sizing — matched to PORTFOLIO font size */
 .intro-title--jsr {
-  font-size: clamp(6.5rem, 20vw, 16rem);
-  letter-spacing: 0.06em;
+  font-size: clamp(3.5rem, 12vw, 10rem);
+  letter-spacing: 0.04em;
 }
 
 /* PORTFOLIO sizing */
