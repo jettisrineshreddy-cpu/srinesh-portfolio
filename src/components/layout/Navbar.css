@@ -8,7 +8,13 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  transition: background var(--transition-smooth), backdrop-filter var(--transition-smooth);
+  transition: background var(--transition-smooth), backdrop-filter var(--transition-smooth), opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+body.modal-open .navbar {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
 }
 
 .navbar--scrolled {

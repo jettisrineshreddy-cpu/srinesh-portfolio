@@ -13,6 +13,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   useEffect(() => {
     if (project) {
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
       // Basic accessibility trap
       const handleEsc = (e: KeyboardEvent) => {
         if (e.key === 'Escape') onClose();
@@ -20,6 +21,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       window.addEventListener('keydown', handleEsc);
       return () => {
         document.body.style.overflow = '';
+        document.body.classList.remove('modal-open');
         window.removeEventListener('keydown', handleEsc);
       };
     }
