@@ -1,14 +1,10 @@
 /* ═══════════════════════════════════════════════════════════
-   STYLE B (TRUTH) CINEMATIC TITLE INTRO
-   Direct 1:1 recreation of Reference Image 2:
-   - Deep cinematic near-black with rich ambient crimson back-haze
-   - Massive, heavy, distressed uppercase typography
-   - Incandescent white-hot / soft-pink interior fill
-   - Searing neon ruby & scarlet edge illumination
-   - Smoky atmospheric back-glow and subtle floating embers
+   CINEMATIC INTRO — TRUTH-style glowing typography
+   Reference: White-hot interior, intense crimson edge glow,
+   distressed texture, red embers, deep atmospheric haze.
 ═══════════════════════════════════════════════════════════ */
 
-.truth-intro {
+.intro-overlay {
   position: fixed;
   inset: 0;
   z-index: 100000;
@@ -21,57 +17,27 @@
   user-select: none;
 }
 
-/* Atmospheric Red Haze / Back-glow (Signature trait of Image 2) */
-.truth-intro__haze {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 90vw;
-  height: 60vh;
-  max-width: 1200px;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    ellipse at center,
-    rgba(227, 24, 55, 0.35) 0%,
-    rgba(181, 14, 38, 0.22) 35%,
-    rgba(100, 6, 20, 0.12) 60%,
-    transparent 78%
-  );
-  filter: blur(80px);
-  pointer-events: none;
-  opacity: 0;
-}
-
-/* Secondary intense focal glow directly behind text */
-.truth-intro__backlight {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 75vw;
-  height: 25vh;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 45, 75, 0.45) 0%,
-    rgba(200, 20, 45, 0.18) 50%,
-    transparent 80%
-  );
-  filter: blur(45px);
-  pointer-events: none;
-  opacity: 0;
-}
-
-/* Fine atmospheric smoke / texture */
-.truth-intro__grain {
+/* ─── R3F Canvas container (behind HTML text) ─────────── */
+.intro-overlay__canvas {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.04;
+  z-index: 1;
   pointer-events: none;
 }
 
-/* Content Container */
-.truth-intro__content {
+/* ─── Film grain texture ──────────────────────────────── */
+.intro-overlay__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ─── Content container (above canvas) ────────────────── */
+.intro-overlay__content {
   position: relative;
   z-index: 10;
   display: flex;
@@ -84,18 +50,19 @@
   padding: 0 2rem;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   MASSIVE BOLD DISTRESSED TITLE — THE EXACT "TRUTH" LOOK
-═══════════════════════════════════════════════════════════ */
-.truth-intro__title-wrapper {
+.intro-overlay__title-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 10rem;
 }
 
-.truth-title {
+/* ═══════════════════════════════════════════════════════════
+   GLOWING TYPOGRAPHY — Exact "TRUTH" visual match
+═══════════════════════════════════════════════════════════ */
+.intro-title {
   font-family: var(--font-display, "Space Grotesk", sans-serif);
   font-weight: 800;
   text-transform: uppercase;
@@ -106,62 +73,64 @@
   opacity: 0;
   transform: scale(0.96);
 
-  /* Distressed interior with white-hot illumination */
+  /* White-hot / soft-pink interior fill */
   color: #fff2f4;
   background: linear-gradient(
     180deg,
     #ffffff 0%,
-    #ffe6e9 30%,
-    #ffc0c8 65%,
-    #ffa4b0 100%
+    #ffe8eb 25%,
+    #ffc5ce 55%,
+    #ffadb8 80%,
+    #ff95a3 100%
   );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  /* Searing multi-stage red & white bloom (exact match to Image 2) */
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))
-         drop-shadow(0 0 25px rgba(255, 30, 60, 0.95))
-         drop-shadow(0 0 55px rgba(220, 15, 45, 0.8))
-         drop-shadow(0 0 95px rgba(160, 10, 30, 0.6));
+  /* Multi-layer crimson bloom glow */
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.85))
+         drop-shadow(0 0 18px rgba(255, 30, 60, 0.9))
+         drop-shadow(0 0 45px rgba(220, 15, 45, 0.75))
+         drop-shadow(0 0 80px rgba(160, 10, 30, 0.55))
+         drop-shadow(0 0 120px rgba(120, 5, 20, 0.35));
 }
 
-/* Stage 1 Size: JSR */
-.truth-title--jsr {
-  font-size: clamp(6.5rem, 20vw, 15.5rem);
-  letter-spacing: 0.05em;
+/* JSR sizing */
+.intro-title--jsr {
+  font-size: clamp(6.5rem, 20vw, 16rem);
+  letter-spacing: 0.06em;
 }
 
-/* Stage 2 Size: Full Name */
-.truth-title--fullname {
-  font-size: clamp(2.4rem, 6.5vw, 6.0rem);
+/* Full name sizing */
+.intro-title--fullname {
+  font-size: clamp(2.2rem, 6.5vw, 6rem);
   letter-spacing: -0.01em;
   white-space: nowrap;
 }
 
-/* Intense luminous outer border mimicking distressed letter edges */
-.truth-title::before {
+/* ─── Crimson edge stroke (::before) ─────────────────── */
+.intro-title::before {
   content: attr(data-text);
   position: absolute;
   inset: 0;
   z-index: -1;
-  -webkit-text-stroke: 3px #ff254b;
+  -webkit-text-stroke: 2.5px #ff254b;
   -webkit-text-fill-color: transparent;
-  filter: blur(2px) drop-shadow(0 0 20px #ff2040);
-  opacity: 0.9;
+  filter: blur(1.5px) drop-shadow(0 0 15px rgba(255, 32, 64, 0.8));
+  opacity: 0.85;
 }
 
-/* Distressed inner grunge mask texture */
-.truth-title::after {
+/* ─── Distressed texture overlay (::after) ───────────── */
+.intro-title::after {
   content: attr(data-text);
   position: absolute;
   inset: 0;
   z-index: 1;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    transparent 45%,
-    rgba(255, 50, 75, 0.6) 80%,
+    rgba(255, 255, 255, 0.85) 0%,
+    transparent 40%,
+    rgba(255, 50, 75, 0.5) 75%,
     transparent 100%
   );
   background-clip: text;
@@ -171,31 +140,72 @@
   pointer-events: none;
 }
 
-/* Tagline beneath full name */
-.truth-intro__subline {
-  font-family: var(--font-mono, monospace);
-  font-size: clamp(0.7rem, 1.3vw, 0.95rem);
+/* ─── Tagline beneath full name ──────────────────────── */
+.intro-overlay__subline {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: clamp(0.65rem, 1.2vw, 0.9rem);
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: #ffb8c2;
   margin-top: 2rem;
   opacity: 0;
-  filter: drop-shadow(0 0 10px rgba(255, 40, 70, 0.7));
+  filter: drop-shadow(0 0 8px rgba(255, 40, 70, 0.6));
 }
 
-/* Skip Button */
-.truth-intro__skip {
+/* ─── Progress indicator ─────────────────────────────── */
+.intro-overlay__progress {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 15;
+}
+
+.intro-overlay__progress-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 184, 194, 0.4);
+  opacity: 0;
+}
+
+.intro-overlay__progress-track {
+  width: 48px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+  border-radius: 1px;
+}
+
+.intro-overlay__progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #8b0000, #ff2040);
+  border-radius: 1px;
+}
+
+/* ─── Skip button ────────────────────────────────────── */
+.intro-overlay__skip {
   position: absolute;
   top: 2rem;
   right: 2rem;
   font-family: var(--font-mono, monospace);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  background: rgba(20, 4, 7, 0.6);
-  border: 1px solid rgba(255, 30, 60, 0.35);
-  padding: 0.5rem 1.25rem;
+  color: rgba(255, 255, 255, 0.4);
+  background: rgba(20, 4, 7, 0.5);
+  border: 1px solid rgba(255, 30, 60, 0.25);
+  padding: 0.45rem 1.1rem;
   cursor: pointer;
   border-radius: 2px;
   backdrop-filter: blur(10px);
@@ -203,27 +213,50 @@
   transition: all 0.25s ease;
 }
 
-.truth-intro__skip:hover {
+.intro-overlay__skip:hover {
   color: #ffffff;
   border-color: #ff3355;
-  background: rgba(255, 30, 60, 0.2);
-  box-shadow: 0 0 20px rgba(255, 30, 60, 0.4);
+  background: rgba(255, 30, 60, 0.15);
+  box-shadow: 0 0 15px rgba(255, 30, 60, 0.3);
 }
 
+/* ─── Reduced motion ─────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .truth-intro {
+  .intro-overlay {
     display: none;
   }
 }
 
+/* ─── Mobile ─────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .truth-title--fullname {
-    font-size: clamp(1.8rem, 8vw, 3.2rem);
-    white-space: normal;
+  .intro-title--jsr {
+    font-size: clamp(4rem, 18vw, 8rem);
   }
 
-  .truth-intro__skip {
+  .intro-title--fullname {
+    font-size: clamp(1.6rem, 7vw, 2.8rem);
+    white-space: normal;
+    line-height: 1.1;
+  }
+
+  .intro-overlay__skip {
     top: 1.25rem;
     right: 1.25rem;
+    font-size: 0.55rem;
+    padding: 0.4rem 0.9rem;
+  }
+
+  .intro-overlay__progress {
+    bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-title--jsr {
+    font-size: clamp(3.5rem, 20vw, 6rem);
+  }
+
+  .intro-title--fullname {
+    font-size: clamp(1.3rem, 6.5vw, 2rem);
   }
 }

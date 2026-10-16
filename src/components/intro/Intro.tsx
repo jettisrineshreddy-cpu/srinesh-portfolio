@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useCallback, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
 import gsap from 'gsap';
+import { IntroScene } from './IntroScene';
+import type { IntroSceneHandle } from './IntroScene';
 import './Intro.css';
 
 interface IntroProps {
@@ -7,20 +10,18 @@ interface IntroProps {
 }
 
 /**
- * STYLE B (TRUTH) CINEMATIC TITLE INTRO
- * Direct 1:1 recreation of Reference Image 2:
- * - Pure deep crimson-black atmospheric fog (#030102)
- * - Large distressed uppercase typography
- * - White-hot illuminated interior core (#fff2f4)
- * - Intense multi-stage ruby/scarlet edge glow
- * - Controlled cinematic sequence (~3.0s total):
- *   1. Red atmospheric haze emerges from darkness
- *   2. Searing "JSR" monogram ignites with incandescent bloom
- *   3. Sharp transition into "JETTI SRINESH REDDY"
- *   4. Clean dissolve directly into homepage
+ * Cinematic intro overlay with Three.js particle effects
+ * and CSS typography matching the "TRUTH" reference style.
+ *
+ * Timeline (~5s):
+ *   0.0–0.8s  Darkness → crimson haze + particles fade in
+ *   0.8–2.2s  "JSR" ignites with glow + light sweep
+ *   2.2–3.5s  JSR dissolves → "JETTI SRINESH REDDY" + subline
+ *   3.5–5.0s  Hold briefly → full dissolve → onComplete
  */
 export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<IntroSceneHandle>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const [stage, setStage] = useState<'jsr' | 'fullname'>('jsr');
   const [visible, setVisible] = useState(true);
@@ -48,99 +49,205 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
   }, [handleComplete]);
 
   useEffect(() => {
+    // Session gating
     if (sessionStorage.getItem('introSeen') === 'true') {
       handleComplete();
       return;
     }
 
+    // Reduced motion check
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       handleComplete();
       return;
     }
 
-    const tl = gsap.timeline({
-      onComplete: handleComplete,
-    });
-    tlRef.current = tl;
+    // Small delay for React to mount the Canvas
+    const mountDelay = setTimeout(() => {
+      const scene = sceneRef.current;
 
-    // 0.0s – 0.6s: Crimson Haze & Backlight emerge from darkness
-    tl.to('.truth-intro__haze', {
-      opacity: 1,
-      duration: 0.8,
-      ease: 'power2.out',
-    })
-    .to('.truth-intro__backlight', {
-      opacity: 1,
-      duration: 0.6,
-      ease: 'power2.out',
-    }, 0.2)
+      const tl = gsap.timeline({
+        onComplete: handleComplete,
+      });
+      tlRef.current = tl;
 
-    // 0.5s – 1.4s: JSR Monogram Ignites with White-Hot Core
-    .to('.truth-title--jsr', {
-      opacity: 1,
-      scale: 1.0,
-      duration: 0.75,
-      ease: 'power3.out',
-    }, 0.4)
+      // Proxy objects for Three.js imperative controls
+      const hazeProxy = { value: 0 };
+      const particlesProxy = { value: 0 };
+      const sweepProxy = { value: -10 };
 
-    // 1.5s – 1.8s: Quick bloom surge and swap to Full Name
-    .to('.truth-title--jsr', {
-      scale: 1.05,
-      opacity: 0,
-      filter: 'blur(8px)',
-      duration: 0.35,
-      ease: 'power2.in',
-      onComplete: () => {
-        setStage('fullname');
-      },
-    }, 1.5)
+      // ── STAGE 1: Darkness → Haze + Particles (0.0–0.8s) ──
 
-    // 1.85s – 2.8s: JETTI SRINESH REDDY strikes in with intense red bloom
-    .fromTo('.truth-title--fullname', 
-      { opacity: 0, scale: 0.94, filter: 'blur(6px)' },
-      { opacity: 1, scale: 1.0, filter: 'blur(0px)', duration: 0.7, ease: 'power4.out' },
-      1.85
-    )
-    .to('.truth-intro__subline', {
-      opacity: 1,
-      duration: 0.5,
-      ease: 'power2.out',
-    }, 2.1)
+      // Fade in crimson haze
+      tl.to(hazeProxy, {
+        value: 0.9,
+        duration: 1.0,
+        ease: 'power2.out',
+        onUpdate: () => scene?.setHazeOpacity(hazeProxy.value),
+      }, 0)
 
-    // 2.9s – 3.4s: Cinematic dissolve into the homepage
-    .to(overlayRef.current, {
-      opacity: 0,
-      duration: 0.55,
-      ease: 'power2.inOut',
-    }, 2.9);
+      // Fade in particles
+      .to(particlesProxy, {
+        value: 0.65,
+        duration: 1.2,
+        ease: 'power2.out',
+        onUpdate: () => scene?.setParticlesOpacity(particlesProxy.value),
+      }, 0.3)
+
+      // Progress bar fills over entire duration
+      .to('.intro-overlay__progress-fill', {
+        width: '100%',
+        duration: 4.5,
+        ease: 'power1.inOut',
+      }, 0)
+
+      // Progress label appears
+      .to('.intro-overlay__progress-label', {
+        opacity: 1,
+        duration: 0.4,
+      }, 0.2)
+
+      // ── STAGE 2: JSR Ignites (0.8–2.2s) ──
+
+      // Light sweep moves across
+      .to(sweepProxy, {
+        value: 10,
+        duration: 2.0,
+        ease: 'power1.inOut',
+        onUpdate: () => scene?.setSweepX(sweepProxy.value),
+      }, 0.5)
+
+      // JSR text appears with scale animation
+      .to('.intro-title--jsr', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power3.out',
+      }, 0.8)
+
+      // Brief intensification of glow
+      .to(hazeProxy, {
+        value: 1.2,
+        duration: 0.4,
+        ease: 'power2.out',
+        onUpdate: () => scene?.setHazeOpacity(Math.min(hazeProxy.value, 1)),
+      }, 1.2)
+      .to(hazeProxy, {
+        value: 0.7,
+        duration: 0.5,
+        ease: 'power2.inOut',
+        onUpdate: () => scene?.setHazeOpacity(hazeProxy.value),
+      }, 1.6)
+
+      // ── STAGE 3: JSR → Full Name (2.2–3.5s) ──
+
+      // JSR scales down and dissolves
+      .to('.intro-title--jsr', {
+        scale: 1.06,
+        opacity: 0,
+        filter: 'blur(8px)',
+        duration: 0.4,
+        ease: 'power2.in',
+        onComplete: () => setStage('fullname'),
+      }, 2.2)
+
+      // Full name reveals
+      .fromTo('.intro-title--fullname',
+        { opacity: 0, scale: 0.93, filter: 'blur(5px)' },
+        {
+          opacity: 1,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 0.7,
+          ease: 'power4.out',
+        },
+        2.7
+      )
+
+      // Subline text
+      .to('.intro-overlay__subline', {
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out',
+      }, 3.0)
+
+      // Particles intensify slightly for the full name
+      .to(particlesProxy, {
+        value: 0.85,
+        duration: 0.6,
+        ease: 'power2.out',
+        onUpdate: () => scene?.setParticlesOpacity(particlesProxy.value),
+      }, 2.7)
+
+      // ── STAGE 4: Hold + Dissolve (3.5–5.0s) ──
+
+      // Start fading particles + haze
+      .to(particlesProxy, {
+        value: 0,
+        duration: 0.8,
+        ease: 'power2.inOut',
+        onUpdate: () => scene?.setParticlesOpacity(particlesProxy.value),
+      }, 4.0)
+      .to(hazeProxy, {
+        value: 0,
+        duration: 0.8,
+        ease: 'power2.inOut',
+        onUpdate: () => scene?.setHazeOpacity(hazeProxy.value),
+      }, 4.0)
+
+      // Final overlay dissolve
+      .to(overlayRef.current, {
+        opacity: 0,
+        duration: 0.6,
+        ease: 'power2.inOut',
+      }, 4.2);
+    }, 100);
 
     return () => {
-      tl.kill();
+      clearTimeout(mountDelay);
+      if (tlRef.current) {
+        tlRef.current.kill();
+      }
     };
   }, [handleComplete]);
 
   if (!visible) return null;
 
   return (
-    <div className="truth-intro" ref={overlayRef}>
-      {/* Background Volumetric Crimson Haze & Lighting */}
-      <div className="truth-intro__haze" />
-      <div className="truth-intro__backlight" />
-      <div className="truth-intro__grain" />
+    <div className="intro-overlay" ref={overlayRef}>
+      {/* Three.js Canvas — behind everything */}
+      <div className="intro-overlay__canvas">
+        <Canvas
+          gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
+          camera={{ position: [0, 0, 5], fov: 50 }}
+          dpr={[1, 1.5]}
+          style={{ width: '100%', height: '100%' }}
+        >
+          <IntroScene ref={sceneRef} />
+        </Canvas>
+      </div>
 
-      {/* Main Searing Typographic Core */}
-      <div className="truth-intro__content">
-        <div className="truth-intro__title-wrapper">
+      {/* Film grain */}
+      <div className="intro-overlay__grain" />
+
+      {/* Typography content */}
+      <div className="intro-overlay__content">
+        <div className="intro-overlay__title-wrapper">
           {stage === 'jsr' ? (
-            <h1 className="truth-title truth-title--jsr" data-text="JSR">
+            <h1
+              className="intro-title intro-title--jsr"
+              data-text="JSR"
+            >
               JSR
             </h1>
           ) : (
             <>
-              <h1 className="truth-title truth-title--fullname" data-text="JETTI SRINESH REDDY">
+              <h1
+                className="intro-title intro-title--fullname"
+                data-text="JETTI SRINESH REDDY"
+              >
                 JETTI SRINESH REDDY
               </h1>
-              <div className="truth-intro__subline">
+              <div className="intro-overlay__subline">
                 AI &times; DATA &times; ENGINEERING
               </div>
             </>
@@ -148,8 +255,20 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
         </div>
       </div>
 
-      {/* Skip Button */}
-      <button className="truth-intro__skip" onClick={handleSkip} aria-label="Skip Intro">
+      {/* Progress indicator */}
+      <div className="intro-overlay__progress">
+        <span className="intro-overlay__progress-label">LOADING</span>
+        <div className="intro-overlay__progress-track">
+          <div className="intro-overlay__progress-fill" />
+        </div>
+      </div>
+
+      {/* Skip button */}
+      <button
+        className="intro-overlay__skip"
+        onClick={handleSkip}
+        aria-label="Skip Intro"
+      >
         SKIP &rarr;
       </button>
     </div>
