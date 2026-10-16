@@ -19,6 +19,7 @@ export const App: React.FC = () => {
   const [introComplete, setIntroComplete] = useState(
     () => sessionStorage.getItem('introSeen') === 'true'
   );
+  const [introKey, setIntroKey] = useState(0);
   const [showReplay, setShowReplay] = useState(false);
 
   useGsapAnimations();
@@ -30,14 +31,16 @@ export const App: React.FC = () => {
   }, []);
 
   const handleReplay = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
     sessionStorage.removeItem('introSeen');
+    setIntroKey((prev) => prev + 1);
     setIntroComplete(false);
     setShowReplay(false);
   }, []);
 
   return (
     <div className="portfolio-app">
-      {!introComplete && <Intro onComplete={handleIntroComplete} />}
+      {!introComplete && <Intro key={introKey} onComplete={handleIntroComplete} />}
       
       <CustomCursor />
       <SkipLink />
