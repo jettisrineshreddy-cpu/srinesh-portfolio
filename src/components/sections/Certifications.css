@@ -194,6 +194,39 @@
 /* Education block */
 .edu__block {
   border-top: none;
+  background: rgba(255, 255, 255, 0.01);
+  padding: 2.2rem 2rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+}
+
+.edu__block:hover {
+  border-color: rgba(181, 18, 43, 0.35);
+  background: rgba(181, 18, 43, 0.02);
+}
+
+.edu__block .cert-item__name {
+  font-size: 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.edu__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.edu__tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.6rem;
+  text-transform: uppercase;
 }
 
 /* Reduced motion */

@@ -113,10 +113,15 @@ export const Certifications: React.FC = () => {
         <div className="edu__block cert-item">
           <div className="cert-item__left">
             <span className="cert-item__code">{profileData.duration}</span>
-            <span className="cert-item__name">{profileData.degree}</span>
+            <h3 className="cert-item__name">{profileData.degree}</h3>
             <span className="cert-item__meta">{profileData.university} &middot; {profileData.campus}</span>
+            <div className="edu__tags">
+              <span className="edu__tag">AI Systems &amp; Neural Nets</span>
+              <span className="edu__tag">Data Engineering &amp; Pipelines</span>
+              <span className="edu__tag">Machine Learning &amp; Analytics</span>
+              <span className="edu__tag">Scientific Computing</span>
+            </div>
           </div>
-          <span className="cert-item__tag">AI Systems &middot; Data Engineering &middot; Machine Learning &middot; Scientific Computing</span>
         </div>
 
       </div>
