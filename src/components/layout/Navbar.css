@@ -110,7 +110,31 @@
 .navbar__right {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
+}
+
+.navbar__sound-btn {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.navbar__sound-btn:hover {
+  color: var(--text-primary);
+  border-color: rgba(227, 38, 54, 0.4);
+}
+
+.navbar__sound-btn.is-active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(227, 38, 54, 0.08);
 }
 
 .navbar__cta {
