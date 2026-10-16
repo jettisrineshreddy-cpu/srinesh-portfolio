@@ -115,6 +115,7 @@ export const SqlPlayground: React.FC<SqlPlaygroundProps> = ({ projectId }) => {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const [isExecuting, setIsExecuting] = useState(false);
   const [hasRun, setHasRun] = useState(true);
+  const [viewMode, setViewMode] = useState<'table' | 'chart'>('table');
 
   if (!presets || presets.length === 0) return null;
 
@@ -177,29 +178,76 @@ export const SqlPlayground: React.FC<SqlPlaygroundProps> = ({ projectId }) => {
             <span className="sql-playground__results-count">
               QUERY EXECUTED · {current.rows.length} ROWS RETURNED
             </span>
-            <span className="sql-playground__exec-time">Execution Time: 32ms</span>
+            <div className="sql-playground__results-controls">
+              <span className="sql-playground__exec-time">Execution Time: 32ms</span>
+              <div className="sql-playground__view-toggles">
+                <button 
+                  className={`sql-playground__toggle-btn ${viewMode === 'table' ? 'is-active' : ''}`}
+                  onClick={() => setViewMode('table')}
+                >
+                  TABLE
+                </button>
+                <button 
+                  className={`sql-playground__toggle-btn ${viewMode === 'chart' ? 'is-active' : ''}`}
+                  onClick={() => setViewMode('chart')}
+                >
+                  LIVE CHART
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div className="sql-playground__table-wrap">
-            <table className="sql-playground__table">
-              <thead>
-                <tr>
-                  {current.columns.map((col) => (
-                    <th key={col}>{col}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {current.rows.map((row, rIdx) => (
-                  <tr key={rIdx}>
-                    {row.map((val, cIdx) => (
-                      <td key={cIdx}>{val}</td>
+          {viewMode === 'table' ? (
+            <div className="sql-playground__table-wrap">
+              <table className="sql-playground__table">
+                <thead>
+                  <tr>
+                    {current.columns.map((col) => (
+                      <th key={col}>{col}</th>
                     ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {current.rows.map((row, rIdx) => (
+                    <tr key={rIdx}>
+                      {row.map((val, cIdx) => (
+                        <td key={cIdx}>{val}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="sql-playground__chart-wrap">
+              <div className="sql-playground__chart-legend">
+                <span>{current.columns[0]} vs {current.columns[1]}</span>
+              </div>
+              <div className="sql-playground__bars">
+                {current.rows.map((row, idx) => {
+                  const label = String(row[0]);
+                  const rawVal = typeof row[1] === 'number' ? row[1] : parseFloat(String(row[1]).replace(/[^0-9.]/g, '')) || 50;
+                  // Normalize value relative to max in rows
+                  const maxVal = Math.max(...current.rows.map(r => typeof r[1] === 'number' ? r[1] : parseFloat(String(r[1]).replace(/[^0-9.]/g, '')) || 100));
+                  const pct = Math.max(12, Math.min(100, (rawVal / (maxVal || 1)) * 100));
+
+                  return (
+                    <div key={idx} className="sql-playground__bar-row">
+                      <span className="sql-playground__bar-label" title={label}>{label}</span>
+                      <div className="sql-playground__bar-track">
+                        <div 
+                          className="sql-playground__bar-fill" 
+                          style={{ width: `${pct}%` }}
+                        >
+                          <span className="sql-playground__bar-val">{String(row[1])}</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           <div className="sql-playground__insight">
             <span className="sql-playground__insight-label">ANALYTICAL TAKEAWAY</span>

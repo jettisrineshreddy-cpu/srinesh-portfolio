@@ -140,17 +140,136 @@
 .sql-playground__results-bar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
   font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   color: var(--text-dim);
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--glass-border);
+}
+
+.sql-playground__results-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
 }
 
 .sql-playground__exec-time {
   color: #4ade80;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+}
+
+.sql-playground__view-toggles {
+  display: flex;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border);
+}
+
+.sql-playground__toggle-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: 0.25rem 0.65rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sql-playground__toggle-btn:hover {
+  color: var(--text-primary);
+}
+
+.sql-playground__toggle-btn.is-active {
+  background: var(--accent-ruby);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ─── Chart View ────────────────────────────────────────── */
+.sql-playground__chart-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+.sql-playground__chart-legend {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.sql-playground__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.sql-playground__bar-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sql-playground__bar-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sql-playground__bar-track {
+  width: 100%;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  position: relative;
+}
+
+.sql-playground__bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-crimson) 0%, var(--accent-ruby) 70%, var(--accent) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.65rem;
+  transition: width 0.6s var(--ease-out-expo);
+  min-width: 48px;
+}
+
+.sql-playground__bar-val {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .sql-playground__bar-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
 }
 
 .sql-playground__table-wrap {
