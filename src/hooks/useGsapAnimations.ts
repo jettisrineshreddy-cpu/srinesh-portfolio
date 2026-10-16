@@ -13,9 +13,9 @@ export function useGsapAnimations() {
 
     // Wait for the intro to complete before animating the hero.
     // The intro sets sessionStorage('introSeen') when done.
-    // If already seen (page refresh), use a short delay; otherwise wait for the intro (~5.0s).
+    // If already seen (page refresh), use a short delay; otherwise wait for the intro (~6.0s).
     const introAlreadySeen = sessionStorage.getItem('introSeen') === 'true';
-    const heroDelay = introAlreadySeen ? 0.3 : 5.0;
+    const heroDelay = introAlreadySeen ? 0.3 : 6.2;
 
     // ─── HERO (entrance after intro dissolves) ─────────────────────────
     const heroTl = gsap.timeline({ delay: heroDelay });
