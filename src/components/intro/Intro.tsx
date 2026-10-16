@@ -23,7 +23,6 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<IntroSceneHandle>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
-  const [stage, setStage] = useState<'jsr' | 'portfolio' | 'fullname'>('jsr');
   const [visible, setVisible] = useState(true);
 
   const handleComplete = useCallback(() => {
@@ -108,7 +107,9 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
 
       // ── STAGE 2: JSR Ignites (0.8–2.2s) ──
 
-      // Light sweep moves across
+      // ── STAGE 2: JSR Ignites (0.8–2.2s) ──
+
+      // Light sweep moves across JSR
       .to(sweepProxy, {
         value: 10,
         duration: 2.0,
@@ -116,110 +117,120 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
         onUpdate: () => scene?.setSweepX(sweepProxy.value),
       }, 0.5)
 
-      // JSR text appears with scale animation
-      .to('.intro-title--jsr', {
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: 'power3.out',
-      }, 0.8)
+      // JSR text ignites with scale animation
+      .fromTo('.intro-title--jsr',
+        { opacity: 0, scale: 0.94 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power3.out',
+        },
+        0.8
+      )
 
-      // Brief intensification of glow
+      // Intensification of glow on JSR reveal
       .to(hazeProxy, {
         value: 1.2,
         duration: 0.4,
         ease: 'power2.out',
         onUpdate: () => scene?.setHazeOpacity(Math.min(hazeProxy.value, 1)),
-      }, 1.2)
+      }, 1.0)
       .to(hazeProxy, {
         value: 0.7,
         duration: 0.5,
         ease: 'power2.inOut',
         onUpdate: () => scene?.setHazeOpacity(hazeProxy.value),
-      }, 1.6)
+      }, 1.4)
 
-      // ── STAGE 3: JSR → PORTFOLIO (2.2–3.8s) ──
+      // ── STAGE 3: JSR → PORTFOLIO (2.1–3.7s) ──
 
       // JSR dissolves
       .to('.intro-title--jsr', {
-        scale: 1.06,
+        scale: 1.05,
         opacity: 0,
-        filter: 'blur(8px)',
-        duration: 0.35,
+        duration: 0.4,
         ease: 'power2.in',
-        onComplete: () => setStage('portfolio'),
-      }, 2.2)
+      }, 2.0)
 
-      // PORTFOLIO reveals (same glowing style)
-      .fromTo('.intro-title--portfolio',
-        { opacity: 0, scale: 0.93, filter: 'blur(5px)' },
-        {
-          opacity: 1,
-          scale: 1,
-          filter: 'blur(0px)',
-          duration: 0.7,
-          ease: 'power4.out',
-        },
-        2.65
-      )
-
-      // Haze pulse for PORTFOLIO
-      .to(hazeProxy, {
-        value: 1.0,
-        duration: 0.4,
-        ease: 'power2.out',
-        onUpdate: () => scene?.setHazeOpacity(Math.min(hazeProxy.value, 1)),
-      }, 2.65)
-      .to(hazeProxy, {
-        value: 0.7,
-        duration: 0.4,
-        ease: 'power2.inOut',
-        onUpdate: () => scene?.setHazeOpacity(hazeProxy.value),
-      }, 3.1)
-
-      // Second light sweep for PORTFOLIO
+      // Second light sweep moves across PORTFOLIO
       .fromTo(sweepProxy,
         { value: -10 },
         {
           value: 10,
-          duration: 1.5,
+          duration: 1.8,
           ease: 'power1.inOut',
           onUpdate: () => scene?.setSweepX(sweepProxy.value),
         },
-        2.6
+        2.2
       )
 
-      // ── STAGE 4: PORTFOLIO → Full Name (3.8–5.5s) ──
-
-      // PORTFOLIO dissolves
-      .to('.intro-title--portfolio', {
-        scale: 1.06,
-        opacity: 0,
-        filter: 'blur(8px)',
-        duration: 0.35,
-        ease: 'power2.in',
-        onComplete: () => setStage('fullname'),
-      }, 3.8)
-
-      // Full name reveals
-      .fromTo('.intro-title--fullname',
-        { opacity: 0, scale: 0.93, filter: 'blur(5px)' },
+      // PORTFOLIO ignites in the EXACT SAME WAY as JSR
+      .fromTo('.intro-title--portfolio',
+        { opacity: 0, scale: 0.94 },
         {
           opacity: 1,
           scale: 1,
-          filter: 'blur(0px)',
-          duration: 0.7,
-          ease: 'power4.out',
+          duration: 0.8,
+          ease: 'power3.out',
         },
-        4.2
+        2.3
+      )
+
+      // Same intensification of glow on PORTFOLIO reveal
+      .to(hazeProxy, {
+        value: 1.2,
+        duration: 0.4,
+        ease: 'power2.out',
+        onUpdate: () => scene?.setHazeOpacity(Math.min(hazeProxy.value, 1)),
+      }, 2.5)
+      .to(hazeProxy, {
+        value: 0.7,
+        duration: 0.5,
+        ease: 'power2.inOut',
+        onUpdate: () => scene?.setHazeOpacity(hazeProxy.value),
+      }, 2.9)
+
+      // ── STAGE 4: PORTFOLIO → Full Name (3.7–5.5s) ──
+
+      // PORTFOLIO dissolves
+      .to('.intro-title--portfolio', {
+        scale: 1.05,
+        opacity: 0,
+        duration: 0.4,
+        ease: 'power2.in',
+      }, 3.6)
+
+      // Third light sweep moves across full name
+      .fromTo(sweepProxy,
+        { value: -10 },
+        {
+          value: 10,
+          duration: 1.8,
+          ease: 'power1.inOut',
+          onUpdate: () => scene?.setSweepX(sweepProxy.value),
+        },
+        3.8
+      )
+
+      // Full name ignites in the exact same glowing style
+      .fromTo('.intro-title--fullname',
+        { opacity: 0, scale: 0.94 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power3.out',
+        },
+        3.9
       )
 
       // Subline text
       .to('.intro-overlay__subline', {
         opacity: 1,
-        duration: 0.5,
+        duration: 0.6,
         ease: 'power2.out',
-      }, 4.6)
+      }, 4.4)
 
       // Particles intensify for the full name
       .to(particlesProxy, {
@@ -227,7 +238,7 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
         duration: 0.6,
         ease: 'power2.out',
         onUpdate: () => scene?.setParticlesOpacity(particlesProxy.value),
-      }, 4.2)
+      }, 4.0)
 
       // ── STAGE 5: Hold + Dissolve (5.5–6.5s) ──
 
@@ -283,35 +294,31 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
       {/* Typography content */}
       <div className="intro-overlay__content">
         <div className="intro-overlay__title-wrapper">
-          {stage === 'jsr' && (
+          <h1
+            className="intro-title intro-title--jsr"
+            data-text="JSR"
+          >
+            JSR
+          </h1>
+
+          <h1
+            className="intro-title intro-title--portfolio"
+            data-text="PORTFOLIO"
+          >
+            PORTFOLIO
+          </h1>
+
+          <div className="intro-fullname-group">
             <h1
-              className="intro-title intro-title--jsr"
-              data-text="JSR"
+              className="intro-title intro-title--fullname"
+              data-text="JETTI SRINESH REDDY"
             >
-              JSR
+              JETTI SRINESH REDDY
             </h1>
-          )}
-          {stage === 'portfolio' && (
-            <h1
-              className="intro-title intro-title--portfolio"
-              data-text="PORTFOLIO"
-            >
-              PORTFOLIO
-            </h1>
-          )}
-          {stage === 'fullname' && (
-            <>
-              <h1
-                className="intro-title intro-title--fullname"
-                data-text="JETTI SRINESH REDDY"
-              >
-                JETTI SRINESH REDDY
-              </h1>
-              <div className="intro-overlay__subline">
-                AI &times; DATA &times; ENGINEERING
-              </div>
-            </>
-          )}
+            <div className="intro-overlay__subline">
+              AI &times; DATA &times; ENGINEERING
+            </div>
+          </div>
         </div>
       </div>
 
