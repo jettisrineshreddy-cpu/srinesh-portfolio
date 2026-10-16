@@ -23,7 +23,7 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<IntroSceneHandle>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
-  const [stage, setStage] = useState<'jsr' | 'fullname'>('jsr');
+  const [stage, setStage] = useState<'jsr' | 'portfolio' | 'fullname'>('jsr');
   const [visible, setVisible] = useState(true);
 
   const handleComplete = useCallback(() => {
@@ -96,7 +96,7 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
       // Progress bar fills over entire duration
       .to('.intro-overlay__progress-fill', {
         width: '100%',
-        duration: 4.5,
+        duration: 6.0,
         ease: 'power1.inOut',
       }, 0)
 
@@ -138,17 +138,68 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
         onUpdate: () => scene?.setHazeOpacity(hazeProxy.value),
       }, 1.6)
 
-      // ── STAGE 3: JSR → Full Name (2.2–3.5s) ──
+      // ── STAGE 3: JSR → PORTFOLIO (2.2–3.8s) ──
 
-      // JSR scales down and dissolves
+      // JSR dissolves
       .to('.intro-title--jsr', {
         scale: 1.06,
         opacity: 0,
         filter: 'blur(8px)',
+        duration: 0.35,
+        ease: 'power2.in',
+        onComplete: () => setStage('portfolio'),
+      }, 2.2)
+
+      // PORTFOLIO reveals (same glowing style)
+      .fromTo('.intro-title--portfolio',
+        { opacity: 0, scale: 0.93, filter: 'blur(5px)' },
+        {
+          opacity: 1,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 0.7,
+          ease: 'power4.out',
+        },
+        2.65
+      )
+
+      // Haze pulse for PORTFOLIO
+      .to(hazeProxy, {
+        value: 1.0,
         duration: 0.4,
+        ease: 'power2.out',
+        onUpdate: () => scene?.setHazeOpacity(Math.min(hazeProxy.value, 1)),
+      }, 2.65)
+      .to(hazeProxy, {
+        value: 0.7,
+        duration: 0.4,
+        ease: 'power2.inOut',
+        onUpdate: () => scene?.setHazeOpacity(hazeProxy.value),
+      }, 3.1)
+
+      // Second light sweep for PORTFOLIO
+      .fromTo(sweepProxy,
+        { value: -10 },
+        {
+          value: 10,
+          duration: 1.5,
+          ease: 'power1.inOut',
+          onUpdate: () => scene?.setSweepX(sweepProxy.value),
+        },
+        2.6
+      )
+
+      // ── STAGE 4: PORTFOLIO → Full Name (3.8–5.5s) ──
+
+      // PORTFOLIO dissolves
+      .to('.intro-title--portfolio', {
+        scale: 1.06,
+        opacity: 0,
+        filter: 'blur(8px)',
+        duration: 0.35,
         ease: 'power2.in',
         onComplete: () => setStage('fullname'),
-      }, 2.2)
+      }, 3.8)
 
       // Full name reveals
       .fromTo('.intro-title--fullname',
@@ -160,7 +211,7 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
           duration: 0.7,
           ease: 'power4.out',
         },
-        2.7
+        4.2
       )
 
       // Subline text
@@ -168,17 +219,17 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
         opacity: 1,
         duration: 0.5,
         ease: 'power2.out',
-      }, 3.0)
+      }, 4.6)
 
-      // Particles intensify slightly for the full name
+      // Particles intensify for the full name
       .to(particlesProxy, {
         value: 0.85,
         duration: 0.6,
         ease: 'power2.out',
         onUpdate: () => scene?.setParticlesOpacity(particlesProxy.value),
-      }, 2.7)
+      }, 4.2)
 
-      // ── STAGE 4: Hold + Dissolve (3.5–5.0s) ──
+      // ── STAGE 5: Hold + Dissolve (5.5–6.5s) ──
 
       // Start fading particles + haze
       .to(particlesProxy, {
@@ -186,20 +237,20 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
         duration: 0.8,
         ease: 'power2.inOut',
         onUpdate: () => scene?.setParticlesOpacity(particlesProxy.value),
-      }, 4.0)
+      }, 5.5)
       .to(hazeProxy, {
         value: 0,
         duration: 0.8,
         ease: 'power2.inOut',
         onUpdate: () => scene?.setHazeOpacity(hazeProxy.value),
-      }, 4.0)
+      }, 5.5)
 
       // Final overlay dissolve
       .to(overlayRef.current, {
         opacity: 0,
         duration: 0.6,
         ease: 'power2.inOut',
-      }, 4.2);
+      }, 5.7);
     }, 100);
 
     return () => {
@@ -232,14 +283,23 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
       {/* Typography content */}
       <div className="intro-overlay__content">
         <div className="intro-overlay__title-wrapper">
-          {stage === 'jsr' ? (
+          {stage === 'jsr' && (
             <h1
               className="intro-title intro-title--jsr"
               data-text="JSR"
             >
               JSR
             </h1>
-          ) : (
+          )}
+          {stage === 'portfolio' && (
+            <h1
+              className="intro-title intro-title--portfolio"
+              data-text="PORTFOLIO"
+            >
+              PORTFOLIO
+            </h1>
+          )}
+          {stage === 'fullname' && (
             <>
               <h1
                 className="intro-title intro-title--fullname"
