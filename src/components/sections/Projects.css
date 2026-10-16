@@ -211,6 +211,28 @@
   text-transform: uppercase;
 }
 
+.project-showcase__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.project-showcase__link {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.project-showcase__link:hover {
+  color: var(--text-primary);
+}
+
 .project-showcase__btn {
   font-family: var(--font-mono);
   font-size: 0.65rem;

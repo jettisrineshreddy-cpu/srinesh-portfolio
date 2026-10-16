@@ -210,13 +210,26 @@ export const Projects: React.FC = () => {
                   <p className="project-showcase__tech">
                     {project.technologies.slice(0, 4).join(' · ').toUpperCase()}
                   </p>
-                  <button 
-                    className="project-showcase__btn"
-                    onClick={() => setSelectedProject(project)}
-                    aria-label={`View case study for ${project.title}`}
-                  >
-                    VIEW CASE STUDY &rarr;
-                  </button>
+                  <div className="project-showcase__actions">
+                    {project.links.github && project.links.github !== '[ADD PROJECT LINKS]' && (
+                      <a 
+                        href={project.links.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="project-showcase__link"
+                        aria-label={`View ${project.title} on GitHub`}
+                      >
+                        GITHUB &rarr;
+                      </a>
+                    )}
+                    <button 
+                      className="project-showcase__btn"
+                      onClick={() => setSelectedProject(project)}
+                      aria-label={`View interactive case study for ${project.title}`}
+                    >
+                      VIEW CASE STUDY &rarr;
+                    </button>
+                  </div>
                 </div>
                 
                 <div className="project-showcase__divider" />
