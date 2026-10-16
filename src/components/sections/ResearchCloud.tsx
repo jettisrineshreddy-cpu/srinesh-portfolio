@@ -1,10 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React from 'react';
 import { profileData } from '../../data/profile';
 import './ResearchCloud.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Stats for at-a-glance impact
 const STATS = [
@@ -15,38 +11,8 @@ const STATS = [
 ];
 
 export const ResearchCloud: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced || !sectionRef.current) return;
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top 75%',
-      }
-    });
-
-    tl.fromTo('.focus-stat',
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.1 }
-    )
-    .fromTo('.focus-panel',
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.15 },
-      '-=0.3'
-    );
-
-    return () => {
-      ScrollTrigger.getAll().forEach(t => {
-        if (t.trigger === sectionRef.current) t.kill();
-      });
-    };
-  }, []);
-
   return (
-    <section id="research" className="research-cloud section-padding" ref={sectionRef}>
+    <section id="research" className="research-cloud section-padding">
       <div className="content-wrapper">
         <div className="section-header">
           <h2 className="section-title">CURRENT FOCUS</h2>

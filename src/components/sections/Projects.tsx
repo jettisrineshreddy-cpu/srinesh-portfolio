@@ -1,12 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projectsData } from '../../data/projects';
 import type { Project } from '../../data/projects';
 import { ProjectModal } from '../ui/ProjectModal';
 import './Projects.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Custom curated order focusing on the best projects
 const SHOWCASE_ORDER = [
@@ -19,7 +16,6 @@ const SHOWCASE_ORDER = [
 
 export const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const containerRef = useRef<HTMLElement>(null);
 
   // Map to get the projects in the curated order
   const displayProjects = SHOWCASE_ORDER.map(id => projectsData.find(p => p.id === id)).filter(Boolean) as Project[];
@@ -31,31 +27,8 @@ export const Projects: React.FC = () => {
     const entries = document.querySelectorAll('.project-showcase');
     
     entries.forEach((entry) => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: entry,
-          start: 'top 80%',
-        }
-      });
-
-      const visualWrapper = entry.querySelector('.project-showcase__visual-wrapper') as HTMLElement | null;
-      
-      tl.fromTo(entry.querySelector('.project-showcase__header'), 
-        { opacity: 0, y: 30 }, 
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
-      )
-      .fromTo(visualWrapper,
-        { opacity: 0, scale: 0.97, y: 20 },
-        { opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power3.out' },
-        '-=0.4'
-      )
-      .fromTo(entry.querySelector('.project-showcase__footer'),
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-        '-=0.6'
-      );
-
       // Mouse parallax for image tracking
+      const visualWrapper = entry.querySelector('.project-showcase__visual-wrapper') as HTMLElement | null;
       if (visualWrapper) {
         const onMouseEnter = () => {
           const img = visualWrapper.querySelector('img') || visualWrapper.querySelector('.project-showcase__abstract');
@@ -105,16 +78,11 @@ export const Projects: React.FC = () => {
 
     return () => {
       cleanups.forEach(fn => fn());
-      ScrollTrigger.getAll().forEach(t => {
-        if (t.trigger && (t.trigger as Element).classList?.contains('project-showcase')) {
-          t.kill();
-        }
-      });
     };
   }, []);
 
   return (
-    <section id="projects" className="projects section-padding" ref={containerRef}>
+    <section id="projects" className="projects section-padding">
       <div className="content-wrapper">
         
         <div className="projects__intro">
