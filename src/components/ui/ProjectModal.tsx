@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import type { Project } from '../../data/projects';
 import { GithubIcon } from './Icons';
+import { SqlPlayground } from './SqlPlayground';
 import './ProjectModal.css';
 
 interface ProjectModalProps {
@@ -67,6 +68,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               <h3>OVERVIEW</h3>
               <p>{project.summary}</p>
             </div>
+
+            {/* Interactive SQL Playground for data projects */}
+            <SqlPlayground projectId={project.id} />
 
             {project.analyticalAreasOrComponents && project.analyticalAreasOrComponents.length > 0 && (
               <div className="project-modal__section">
