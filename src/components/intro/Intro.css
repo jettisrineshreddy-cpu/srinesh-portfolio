@@ -1,349 +1,94 @@
 /* ═══════════════════════════════════════════════════════════
-   CINEMATIC HOLLYWOOD INTRO — STYLES
-   Inspired by Reference 1 (particles & laser streaks),
-   Reference 2 (layered metallic red dimensional geometry),
-   and Reference 3 (distressed white-hot illuminated typography)
+   CLEAN EDITORIAL INTRO — MINIMAL & SOPHISTICATED
+   Fast 1.5s reveal. No heavy VFX. Pure typographic clarity.
 ═══════════════════════════════════════════════════════════ */
 
-/* Full-screen pure black cinematic canvas */
 .intro {
   position: fixed;
   inset: 0;
   z-index: 100000;
-  background: #020202;
+  background: #050505;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   user-select: none;
 }
 
-/* 3D WebGL Canvas Layer */
-.intro__canvas-container {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-}
-
-/* Atmospheric 2D background glow layers */
-.intro__bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Deep crimson ambient glow */
-.intro__glow {
-  position: absolute;
-  width: 90vw;
-  height: 90vh;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    ellipse at center,
-    rgba(227, 38, 54, 0.16) 0%,
-    rgba(181, 18, 43, 0.08) 35%,
-    rgba(128, 15, 36, 0.03) 60%,
-    transparent 75%
-  );
-  filter: blur(90px);
-  opacity: 0;
-}
-
-/* 35mm Film Grain Texture */
-.intro__grain {
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.04;
-  pointer-events: none;
-}
-
-/* Horizontal Laser Sweep (Reference 1) */
-.intro__sweep {
-  position: absolute;
-  top: 50%;
-  left: -100%;
-  transform: translateY(-50%);
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(227, 38, 54, 0.3) 25%,
-    rgba(255, 255, 255, 0.95) 50%,
-    rgba(227, 38, 54, 0.3) 75%,
-    transparent 100%
-  );
-  box-shadow: 0 0 35px 8px rgba(227, 38, 54, 0.8),
-              0 0 10px 2px rgba(255, 255, 255, 0.9);
-  pointer-events: none;
-  z-index: 20;
-}
-
-/* Main Content Layer */
-.intro__content {
-  position: relative;
-  z-index: 10;
+.intro__inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
-  width: 100%;
-  max-width: 1300px;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
+  max-width: 900px;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   SCENE TWO: JSR 3D METALLIC INITIALS (Reference 2)
-═══════════════════════════════════════════════════════════ */
-.intro__initials-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.intro__initials {
-  font-family: var(--font-display);
-  font-size: clamp(6rem, 19vw, 15rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 0.9;
+.intro__monogram {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  position: relative;
-  opacity: 0;
-  transform: scale(0.92);
-  /* Distressed chrome metallic gradient with glowing red edge */
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #e8d0d4 25%,
-    #8f303d 50%,
-    #24090d 80%,
-    #100204 100%
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 25px rgba(227, 38, 54, 0.65))
-         drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95));
-}
-
-/* Prismatic Red Outer Stroke Outline (Reference 2) */
-.intro__initials::before {
-  content: 'JSR';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  -webkit-text-stroke: 2px #ff2a4b;
-  -webkit-text-fill-color: transparent;
-  filter: blur(1px) drop-shadow(0 0 18px #ff2a4b);
-  opacity: 0.85;
-}
-
-/* Metallic specular glare */
-.intro__initials::after {
-  content: 'JSR';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    115deg,
-    transparent 35%,
-    rgba(255, 255, 255, 0.9) 48%,
-    rgba(255, 68, 88, 0.8) 52%,
-    transparent 65%
-  );
-  background-size: 200% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  mix-blend-mode: color-dodge;
-  animation: shineSweep 4s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes shineSweep {
-  0% { background-position: -120% 0; }
-  50%, 100% { background-position: 220% 0; }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   SCENE FOUR: JETTI SRINESH REDDY FULL NAME (Reference 3)
-   Distressed metallic texture with intense red-white illumination
-═══════════════════════════════════════════════════════════ */
-.intro__name-container {
-  overflow: hidden;
-  position: relative;
-  padding: 0.5rem 1rem;
-  margin-top: -1.5rem;
+  color: var(--text-dim);
+  margin-bottom: 1.25rem;
 }
 
 .intro__name {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 6.8vw, 6.2rem);
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 0.95;
+  font-size: clamp(2.5rem, 7.5vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  line-height: 1;
   text-transform: uppercase;
-  white-space: nowrap;
-  position: relative;
-  /* Distressed metallic surface illuminated from within (Reference 3) */
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #ffced6 30%,
-    #f24b61 55%,
-    #8a1526 80%,
-    #2a040a 100%
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 30px rgba(227, 38, 54, 0.75))
-         drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+  margin: 0 0 1.5rem 0;
 }
 
-.intro__name-inner {
-  display: block;
-  opacity: 0;
-  transform: translateY(105%);
+.intro__title-line {
+  display: inline-block;
 }
 
-/* Reference 3 White-Hot Edge Glow */
-.intro__name::before {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85);
-  -webkit-text-fill-color: transparent;
-  filter: blur(2px) drop-shadow(0 0 25px #ff2a4b);
-  opacity: 0.7;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   SCENE FIVE: IDENTITY
-═══════════════════════════════════════════════════════════ */
-.intro__statement {
+.intro__tagline {
   font-family: var(--font-mono);
-  font-size: clamp(0.65rem, 1.3vw, 0.95rem);
-  letter-spacing: 0.28em;
+  font-size: clamp(0.65rem, 1.2vw, 0.82rem);
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #c7a1a8;
-  margin-top: 2rem;
-  opacity: 0;
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
+  color: var(--accent);
+  margin: 0;
 }
 
-.intro__statement-bullet {
-  color: #ff2a4b;
-  font-size: 0.7em;
-  filter: drop-shadow(0 0 6px #ff2a4b);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   CONTROLS & PROGRESS
-═══════════════════════════════════════════════════════════ */
-.intro__progress {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  z-index: 25;
-}
-
-.intro__progress-label {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
-  opacity: 0;
-}
-
-.intro__progress-line {
-  width: 90px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.08);
-  position: relative;
-  overflow: hidden;
-  border-radius: 1px;
-}
-
-.intro__progress-fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, #800f24, #ff2a4b, #ffffff);
-  box-shadow: 0 0 10px #ff2a4b;
-}
-
-/* Cinematic Skip Button */
+/* Skip control */
 .intro__skip {
   position: absolute;
   top: 2rem;
   right: 2rem;
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  background: rgba(18, 6, 9, 0.65);
-  border: 1px solid rgba(227, 38, 54, 0.3);
-  padding: 0.55rem 1.35rem;
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  padding: 0.45rem 1rem;
   cursor: pointer;
-  z-index: 30;
-  backdrop-filter: blur(10px);
   border-radius: var(--radius-sm);
-  transition: all 0.3s ease;
+  transition: color 0.2s, border-color 0.2s;
 }
 
 .intro__skip:hover {
-  color: #ffffff;
-  border-color: #ff2a4b;
-  background: rgba(227, 38, 54, 0.2);
-  box-shadow: 0 0 20px rgba(227, 38, 54, 0.4);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
   .intro {
     display: none;
   }
 }
 
-/* Mobile & Tablet Responsiveness */
 @media (max-width: 768px) {
   .intro__skip {
     top: 1.25rem;
     right: 1.25rem;
-    padding: 0.45rem 1rem;
-    font-size: 0.6rem;
-  }
-  
-  .intro__name {
-    font-size: clamp(1.8rem, 8vw, 3.2rem);
-    white-space: normal;
-    text-align: center;
-  }
-
-  .intro__progress {
-    bottom: 2rem;
   }
 }
