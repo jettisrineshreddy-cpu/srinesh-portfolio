@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { profileData } from '../../data/profile';
-import { soundEngine } from '../../lib/sound';
 import './Navbar.css';
 
 const NAV_LINKS = [
@@ -16,7 +15,6 @@ export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [soundActive, setSoundActive] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,18 +87,6 @@ export const Navbar: React.FC = () => {
           </nav>
 
           <div className="navbar__right">
-            <button
-              className={`navbar__sound-btn ${soundActive ? 'is-active' : ''}`}
-              onClick={() => {
-                const state = soundEngine.toggle();
-                setSoundActive(state);
-              }}
-              aria-label={soundActive ? 'Mute sound effects' : 'Enable sound effects'}
-              title={soundActive ? 'Sound: ON' : 'Sound: OFF'}
-            >
-              {soundActive ? '🔊 SOUND' : '🔇 SOUND'}
-            </button>
-
             <a
               href={profileData.links.resume}
               className="navbar__cta"

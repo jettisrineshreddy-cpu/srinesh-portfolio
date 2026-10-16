@@ -1,5 +1,4 @@
 import React from 'react';
-import { soundEngine } from '../../lib/sound';
 import './Button.css';
 
 interface ButtonProps {
@@ -23,21 +22,16 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const classes = `btn btn--${variant} ${className}`.trim();
 
-  const handleClick = () => {
-    soundEngine.playClick();
-    if (onClick) onClick();
-  };
-
   if (href) {
     return (
-      <a href={href} className={classes} target={target} rel={rel} onClick={handleClick}>
+      <a href={href} className={classes} target={target} rel={rel} onClick={onClick}>
         {children}
       </a>
     );
   }
 
   return (
-    <button className={classes} onClick={handleClick}>
+    <button className={classes} onClick={onClick}>
       {children}
     </button>
   );
