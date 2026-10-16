@@ -13,12 +13,14 @@ export const ExperienceModal: React.FC<ExperienceModalProps> = ({ experience, on
   useEffect(() => {
     if (experience) {
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
       const handleEsc = (e: KeyboardEvent) => {
         if (e.key === 'Escape') onClose();
       };
       window.addEventListener('keydown', handleEsc);
       return () => {
         document.body.style.overflow = '';
+        document.body.classList.remove('modal-open');
         window.removeEventListener('keydown', handleEsc);
       };
     }
