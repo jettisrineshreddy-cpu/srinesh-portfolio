@@ -5,26 +5,25 @@ import { useReducedMotion } from './useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function useGsapAnimations() {
+export function useGsapAnimations(introComplete: boolean = true) {
   const prefersReduced = useReducedMotion();
 
+  // ─── HERO (entrance when intro completes) ─────────────────────────
   useEffect(() => {
-    if (prefersReduced) return;
+    if (prefersReduced || !introComplete) return;
 
-    // Wait for the intro to complete before animating the hero.
-    // The intro sets sessionStorage('introSeen') when done.
-    // If already seen (page refresh), use a short delay; otherwise wait for the intro (~6.0s).
-    const introAlreadySeen = sessionStorage.getItem('introSeen') === 'true';
-    const heroDelay = introAlreadySeen ? 0.3 : 6.2;
-
-    // ─── HERO (entrance after intro dissolves) ─────────────────────────
-    const heroTl = gsap.timeline({ delay: heroDelay });
+    const heroTl = gsap.timeline({ delay: 0.1 });
     heroTl
       .fromTo('.hero__status',    { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' })
       .fromTo('.hero__title-line',{ opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power4.out' }, '-=0.3')
       .fromTo('.hero__subtitle',  { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
       .fromTo('.hero__statement', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, '-=0.4')
       .fromTo('.hero__actions',   { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3');
+  }, [introComplete, prefersReduced]);
+
+  // ─── SCROLLTRIGGER ANIMATIONS ───────────────────────────────────────
+  useEffect(() => {
+    if (prefersReduced) return;
 
     // ─── SECTION HEADERS ────────────────────────────────────────────────
     gsap.utils.toArray('.section-header').forEach((header: any) => {

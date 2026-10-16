@@ -22,10 +22,24 @@ export const App: React.FC = () => {
   const [introKey, setIntroKey] = useState(0);
   const [showReplay, setShowReplay] = useState(false);
 
-  useGsapAnimations();
+  // Lock scroll and ensure top position while intro is active
+  React.useEffect(() => {
+    if (!introComplete) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [introComplete, introKey]);
+
+  useGsapAnimations(introComplete);
 
   const handleIntroComplete = useCallback(() => {
     setIntroComplete(true);
+    document.body.style.overflow = '';
     // Show replay button after a short delay
     setTimeout(() => setShowReplay(true), 1000);
   }, []);
