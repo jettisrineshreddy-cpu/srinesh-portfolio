@@ -55,60 +55,60 @@ export const Intro: React.FC<IntroProps> = ({ onComplete }) => {
     // Stage 1: Awakening — glow + sweep
     tl.to('.intro__glow', {
       opacity: 1,
-      duration: 1.5,
+      duration: 1.0,
       ease: 'power2.out',
     })
     .to('.intro__sweep', {
       left: '100%',
-      duration: 2.5,
+      duration: 1.8,
       ease: 'power1.inOut',
     }, 0)
     .to('.intro__progress-label', {
       opacity: 1,
-      duration: 0.5,
-    }, 0.5)
+      duration: 0.4,
+    }, 0.3)
     .to('.intro__progress-fill', {
       width: '100%',
-      duration: 7,
+      duration: 4.2,
       ease: 'power1.inOut',
     }, 0)
 
-    // Stage 2: Initials reveal
+    // Stage 2: Initials reveal (JSR)
     .to('.intro__initials', {
       opacity: 1,
       scale: 1,
-      duration: 1.2,
+      duration: 0.9,
       ease: 'power3.out',
-    }, 1.2)
+    }, 0.8)
 
-    // Stage 3: Initials shrink + name reveal
+    // Stage 3: Initials shrink + full name reveal
     .to('.intro__initials', {
       scale: 0.6,
-      opacity: 0.3,
-      duration: 0.8,
+      opacity: 0.25,
+      duration: 0.6,
       ease: 'power2.inOut',
-    }, 3.2)
+    }, 2.0)
     .to('.intro__name-inner', {
       opacity: 1,
       y: '0%',
-      duration: 1.0,
+      duration: 0.8,
       ease: 'power4.out',
-    }, 3.5)
+    }, 2.2)
 
     // Stage 4: Statement
     .to('.intro__statement', {
       opacity: 1,
-      duration: 0.8,
+      duration: 0.6,
       ease: 'power2.out',
-    }, 4.8)
+    }, 2.9)
 
-    // Final: Fade everything out
+    // Final: Fade everything out seamlessly into homepage
     .to(overlayRef.current, {
       opacity: 0,
       scale: 1.02,
-      duration: 0.8,
+      duration: 0.65,
       ease: 'power2.inOut',
-    }, 6.5);
+    }, 3.8);
 
     return () => {
       tl.kill();
